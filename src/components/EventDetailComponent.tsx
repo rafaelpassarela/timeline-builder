@@ -10,7 +10,7 @@ interface EventDetailProps {
 class EventDetail extends Component<EventDetailProps> {
   render() {
     const { date, title, subtitle, img } = this.props;
-    var imgTag = (img === undefined) ? null : <img className='EventIcon' src={img}/>;
+    var imgTag = (img === undefined) ? null : <img className='EventIcon' src={img} alt="Event Logo"/>;
     return (
         <div className='EventComp'>
             Data {date}

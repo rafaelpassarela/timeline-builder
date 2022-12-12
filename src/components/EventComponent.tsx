@@ -15,7 +15,7 @@ class Event extends Component<EventProps> {
   renderLeft() {
     return (
         <Row>
-            <Col id="item-left">
+            <Col id="item-left" className="quarter-circle-top-left">
                 <EventDetail
                     date={this.props.date}
                     title={this.props.title}
@@ -32,7 +32,7 @@ class Event extends Component<EventProps> {
     return (
         <Row>
             <Col></Col>
-            <Col id="item-right">
+            <Col id="item-right" className="quarter-circle-top-right">
                 <EventDetail
                     date={this.props.date}
                     title={this.props.title}

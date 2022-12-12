@@ -7,7 +7,12 @@ function App() {
   return (
     <Container fluid>
         <Event align='left' date='14/01/2022' title='Teste' subtitle='Sub Teste'></Event>
-        <Event align='right' date='20/02/2022' title='Novo' subtitle='Outro Novo'></Event>
+        <Event
+            align='right'
+            date='20/02/2022'
+            title='Novo'
+            subtitle='Outro Novo'
+            img='https://www.nicepng.com/png/detail/132-1327829_icon-free-download-and-nature-icon.png'></Event>
         <Event align='left' date='14/01/2022' title='Teste' subtitle='Sub Teste'></Event>
         <Event align='right' date='20/02/2022' title='Novo' subtitle='Outro Novo'></Event>
         <Event
