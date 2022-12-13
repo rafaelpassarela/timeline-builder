@@ -6,7 +6,7 @@
     border: 1px solid lightsteelblue;
     border-radius: 8px;
     padding: 6px;
-    max-width: 400px;
+    max-width: 80%;
     min-width: 25%;
 }
 
@@ -19,22 +19,32 @@
     z-index: 9;
 }
 
-.eventText{
-    top: -140px;
-    position: relative;
-    background-color: green;
+small {
+    font-size: 0.70rem !important
 }
 
 .eventIcon-left {
     position: relative;
-    top: -75px;
-    left: -194px;
+    /* top: -75px; */
+    /* left: -316px; */
+    float: left;
+    margin-right: 10px;
 }
 
 .eventIcon-right {
     position: relative;
-    top: -75px;
-    left: 318px;
+    /* top: -75px; */
+    /* left: 318px; */
+    float: right;
+    margin-left: 10px;
+}
+
+.spacer {
+    /*background-color: #ffffff00;*/
+    background-color: red;
+    min-height: 1px;
+    min-width: 40px;
+    float: left;
 }
 
 .GuideLine {
@@ -63,8 +73,8 @@
 .quarter-circle-top-left{
     width: 100px;
     /* height: 100px; */
-    /* background: red; */
-    background-image: linear-gradient(to right, #282c34, red);
+    /* background: red; old color #282c34*/
+    background-image: linear-gradient(to right, #62656a, #252526);
     border-radius: 0 0 100px 0;
     -moz-border-radius: 0 0 100px 0;
     -webkit-border-radius: 0 0 100px 0;
@@ -72,8 +82,8 @@
 .quarter-circle-top-right{
      width: 100px;
      /* height: 100px; */
-     /* background: blue; */
-     background-image: linear-gradient(to left, #282c34, blue);
+     /* background: blue; old color #282c34*/
+     background-image: linear-gradient(to left, #62656a, #252526);
      border-radius: 0 0 0 100px;
      -moz-border-radius: 0 0 0 100px;
      -webkit-border-radius: 0 0 0 100px;
