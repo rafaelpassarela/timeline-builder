@@ -2,20 +2,39 @@
   color: #61dafb;
 }
 
-.EventComp {
-    border: 2px solid lightsteelblue;
+.eventComp {
+    border: 1px solid lightsteelblue;
     border-radius: 8px;
     padding: 6px;
-    max-width: 50%;
+    max-width: 400px;
     min-width: 25%;
 }
 
-.EventIcon {
+.eventIcon {
     border-radius: 50%;
     min-width: 150px;
     max-width: 150px;
     border: 5px solid lightsteelblue;
     background-color: aliceblue;
+    z-index: 9;
+}
+
+.eventText{
+    top: -140px;
+    position: relative;
+    background-color: green;
+}
+
+.eventIcon-left {
+    position: relative;
+    top: -75px;
+    left: -194px;
+}
+
+.eventIcon-right {
+    position: relative;
+    top: -75px;
+    left: 318px;
 }
 
 .GuideLine {
@@ -27,6 +46,18 @@
 .Root {
     /* background-color: rgb(145, 145, 145); */
     color: whitesmoke;
+}
+
+.center {
+    text-align: center;
+}
+
+.title {
+    text-align: center;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 5px;
+    margin-bottom: 30px;
 }
 
 .quarter-circle-top-left{

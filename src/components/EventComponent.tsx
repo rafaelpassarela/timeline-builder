@@ -21,6 +21,7 @@ class Event extends Component<EventProps> {
                     title={this.props.title}
                     subtitle={this.props.subtitle}
                     img={this.props.img}
+                    imgClass='eventIcon-left'
                 />
             </Col>
             <Col></Col>
@@ -38,6 +39,7 @@ class Event extends Component<EventProps> {
                     title={this.props.title}
                     subtitle={this.props.subtitle}
                     img={this.props.img}
+                    imgClass='eventIcon-right'
                 />
             </Col>
         </Row>
