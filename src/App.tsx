@@ -11,21 +11,21 @@ const lorem = "Lorem Ipsum is simply dummy text of the printing and typesetting 
   return (
     <div>
         <Title title='TimeLine Test' subtitle='Just a timeline builder teste component'></Title>
-        <Container fluid>
+        <Container className='base-line' fluid>
             <Event align='left' date='14/01/2022' title='Teste' subtitle='Sub Teste'></Event>
             <Event
                 align='right'
                 date='20/02/2022'
                 title='Novo'
                 subtitle={lorem}
-                img='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz5_MSd5YCveNW5v17B2srLblp2JkuAyUXtQ&usqp=CAU'></Event>
+                img='https://i.pinimg.com/474x/1a/00/cb/1a00cb023f90b759483168335c4246d6.jpg'></Event>
             <Event align='left' date='14/01/2022' title='Teste' subtitle='Sub Teste'></Event>
             <Event align='right' date='20/02/2022' title='Novo' subtitle='Outro Novo'></Event>
             <Event
                 align='left'
                 date='14/01/2022'
                 title='Teste'
-                subtitle={lorem}
+                subtitle={lorem + ' a b c d e f g h i j k.'}
                 img='https://cdn-icons-png.flaticon.com/512/1355/1355083.png'></Event>
             <Event align='right' date='20/02/2022' title='Novo' subtitle='Outro Novo'></Event>
         </Container>
