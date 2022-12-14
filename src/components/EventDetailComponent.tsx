@@ -11,7 +11,7 @@ interface EventDetailProps {
 class EventDetail extends Component<EventDetailProps> {
 
   getImgClassName(imgClass: string | undefined) {
-    return 'eventIcon ' + (imgClass == undefined ? '' : imgClass);
+    return 'eventIcon ' + (imgClass === undefined ? '' : imgClass);
   }
 
   render() {
