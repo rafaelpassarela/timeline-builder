@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import EventDetail from './EventDetailComponent';
+import EventModelInterface from '../class/EventModelInterface';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-interface EventProps {
-  align: "left" | "right";
-  date: string;
-  title: string;
-  subtitle?: string;
-  img?: string;
-}
+// interface EventProps {
+//   align: "left" | "right";
+//   date: string;
+//   title: string;
+//   subtitle?: string;
+//   img?: string;
+// }
 
-class Event extends Component<EventProps> {
+class Event extends Component<EventModelInterface> {
   renderLeft() {
     return (
         <Row>
@@ -21,7 +22,7 @@ class Event extends Component<EventProps> {
                     title={this.props.title}
                     subtitle={this.props.subtitle}
                     img={this.props.img}
-                    imgClass='eventIcon-left'
+                    imgClass="eventIcon-left"
                 />
             </Col>
             <Col></Col>
@@ -39,7 +40,7 @@ class Event extends Component<EventProps> {
                     title={this.props.title}
                     subtitle={this.props.subtitle}
                     img={this.props.img}
-                    imgClass='eventIcon-right'
+                    imgClass="eventIcon-right"
                 />
             </Col>
         </Row>

@@ -10,8 +10,8 @@ class Title extends Component<TitleProps> {
     const { title, subtitle } = this.props;
 
     return (
-        <div className='center'>
-            <div className='title'>
+        <div className="center">
+            <div className="title">
                 <h1>{title}</h1>
                 <h5>{subtitle}</h5>
             </div>

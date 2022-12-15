@@ -18,16 +18,16 @@ class EventDetail extends Component<EventDetailProps> {
     const { date, title, subtitle, img, imgClass } = this.props;
     var imgTag = (img === undefined) ? null : <img className={this.getImgClassName(imgClass)} src={img} alt="Event Logo"/>;
     var spacer = (imgClass === 'eventIcon-right' ) ?
-        <div className='spacer-right'></div> :
-        <div className='spacer-left'></div>;
+        <div className="spacer-right"></div> :
+        <div className="spacer-left"></div>;
 
     return (
-        <div className='eventComp'>
+        <div className="eventComp">
             {imgTag}
             <div>
                 <small>{date}</small><br/>
                 <h2>{title}</h2>
-                <div className='eventText'>
+                <div className="eventText">
                     {subtitle}{spacer}
                 </div>
 
