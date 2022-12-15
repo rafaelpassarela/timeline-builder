@@ -4,14 +4,6 @@ import EventModelInterface from '../class/EventModelInterface';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-// interface EventProps {
-//   align: "left" | "right";
-//   date: string;
-//   title: string;
-//   subtitle?: string;
-//   img?: string;
-// }
-
 class Event extends Component<EventModelInterface> {
   renderLeft() {
     return (

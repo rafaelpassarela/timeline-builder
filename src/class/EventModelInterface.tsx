@@ -1,5 +1,5 @@
 interface EventModelInterface {
-    align: "left" | "right";
+    align: "left" | "right" | "auto";
     date: string;
     title: string;
     subtitle?: string;
