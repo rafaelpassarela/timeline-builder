@@ -92,6 +92,22 @@ small {
     margin-bottom: 30px;
 }
 
+.title-edit {
+    border-style: dashed;
+    border-width: 1px;
+}
+
+.title-edit:hover {
+    background-color: #585b5f;
+    cursor: pointer;
+}
+
+.title-input {
+    width: 100%;
+    color: white;
+    background-color: #62656a;
+}
+
 .quarter-circle-top-left{
     width: 100px;
     /* height: 100px; */

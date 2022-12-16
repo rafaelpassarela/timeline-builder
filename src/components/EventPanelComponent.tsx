@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import Container from 'react-bootstrap/Container';
 import EventModelInterface from "../class/EventModelInterface";
+import TitleInterface from "../class/TitleComponentInterface";
 import Event from './EventComponent';
-import Title from './TitleComponent';
+import Title from './title/TitleComponent';
 
 interface EventPanelProps {
-
+    titleConfig: TitleInterface
 }
 
 const lorem = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum like abc abc.";
@@ -26,7 +27,7 @@ class EventPanel extends Component<EventPanelProps> {
 
         return (
             <div>
-                <Title title='TimeLine Test' subtitle='Just a timeline builder teste component'></Title>
+                <Title title={this.props.titleConfig.title} subtitle={this.props.titleConfig.subtitle} editable={this.props.titleConfig.editable}></Title>
                 <Container className='base-line' fluid>
                     {
                         itens.map((val: EventModelInterface, idx: number): any => {

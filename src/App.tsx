@@ -1,16 +1,13 @@
-import MainMenu from './components/MainMenuComponent';
-import EventPanel from './components/EventPanelComponent';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AppContainer from './components/AppContainerComponent';
 
 function App() {
 
     return (
-        <div>
-            <MainMenu />
-            <EventPanel />
-        </div>
+        <AppContainer />
     );
+
 }
 
 export default App;
