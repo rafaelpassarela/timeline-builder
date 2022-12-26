@@ -9,7 +9,8 @@ interface TitleElementState {
 interface TitleElementProp {
     text: string,
     editable?: boolean,
-    elemType: "h1" | "h5";
+    elemType: "h1" | "h5",
+    callback: (value: string, type: "h1" | "h5") => void;
 }
 
 class TitleElement extends Component<TitleElementProp, TitleElementState> {
@@ -56,7 +57,8 @@ class TitleElement extends Component<TitleElementProp, TitleElementState> {
                 this.setState({
                     isEditing: false
                 });
-                break
+                break;
+
             default:
                 break;
         }
@@ -67,7 +69,7 @@ class TitleElement extends Component<TitleElementProp, TitleElementState> {
             this.setState({
                 isEditing: false,
                 text: this.state.editingText.trim()
-            });
+            }, () => this.props.callback(this.state.text, this.props.elemType));
         }
     }
 

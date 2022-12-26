@@ -20,7 +20,7 @@ class AppContainer extends Component<AppContainerProp, AppContainerState> {
             titleConfig: {
                 title: "My New Timeline",
                 subtitle: "This is my little timeline",
-                editable: false
+                editable: true
             }
         };
     }
