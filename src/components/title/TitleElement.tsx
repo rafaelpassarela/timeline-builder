@@ -24,12 +24,14 @@ class TitleElement extends Component<TitleElementProp, TitleElementState> {
         this.textClickHandler = this.textClickHandler.bind(this);
         this.textBlurHandler = this.textBlurHandler.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
     }
 
     textClickHandler(e: React.MouseEvent<HTMLHeadingElement>) {
         e.preventDefault();
         if (this.props.editable) {
             this.setState({
+                editingText: this.state.text,
                 isEditing: true
             });
         }
@@ -44,11 +46,27 @@ class TitleElement extends Component<TitleElementProp, TitleElementState> {
         }
     }
 
+    handleKeyDown(e: any) {
+        switch (e.keyCode) {
+            case 13: // enter
+                e.target.blur();
+                break;
+
+            case 27: // esc
+                this.setState({
+                    isEditing: false
+                });
+                break
+            default:
+                break;
+        }
+    }
+
     textBlurHandler(e: any) {
-        if (this.props.editable) {
+        if (this.props.editable && this.state.isEditing) {
             this.setState({
                 isEditing: false,
-                text: this.state.editingText
+                text: this.state.editingText.trim()
             });
         }
     }
@@ -61,7 +79,8 @@ class TitleElement extends Component<TitleElementProp, TitleElementState> {
                     autoFocus
                     defaultValue={text}
                     onChange={this.handleChange}
-                    onBlur={this.textBlurHandler}/>
+                    onBlur={this.textBlurHandler}
+                    onKeyDown={this.handleKeyDown}/>
             );
         }
 
