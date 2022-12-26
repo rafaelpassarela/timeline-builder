@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import Container from 'react-bootstrap/Container';
+import Container from "react-bootstrap/Container";
 import EventModelInterface from "../class/EventModelInterface";
+import TimelineStorageInterface from "../class/TimelineStorageInterface";
 import TitleInterface from "../class/TitleComponentInterface";
-import Event from './EventComponent';
-import Title from './title/TitleComponent';
+import Event from "./EventComponent";
+import Title from "./title/TitleComponent";
 
 interface EventPanelProps {
     titleConfig: TitleInterface
@@ -20,14 +21,44 @@ const itens = Array<EventModelInterface>(
     {align: "auto", date: "05/01/2022", title: "Ultima entrada", subtitle: "Sub Teste ultima"}
 );
 
-class EventPanel extends Component<EventPanelProps> {
+class EventPanel extends Component<EventPanelProps, TimelineStorageInterface> {
+
+    constructor(props: EventPanelProps) {
+        super(props);
+        this.state = {
+          title: this.props.titleConfig.title,
+          subtitle: this.props.titleConfig.subtitle!
+        };
+        this.titleChangeHandler = this.titleChangeHandler.bind(this);
+    }
+
+    titleChangeHandler(value: string, type: "h1" | "h5") {
+        switch (type) {
+            case "h1":
+                this.setState({title: value});
+                break;
+
+            case "h5":
+                this.setState({subtitle: value});
+                break;
+
+            default:
+                break;
+        }
+    }
 
     render() {
         let lastAlign = "right" as "left" | "right" | "auto";
 
         return (
             <div>
-                <Title title={this.props.titleConfig.title} subtitle={this.props.titleConfig.subtitle} editable={this.props.titleConfig.editable}></Title>
+                <pre>{JSON.stringify(this.state, null, 2) }</pre>
+                <Title
+                    title={this.props.titleConfig.title}
+                    subtitle={this.props.titleConfig.subtitle}
+                    editable={this.props.titleConfig.editable}
+                    callback={this.titleChangeHandler}
+                />
                 <Container className='base-line' fluid>
                     {
                         itens.map((val: EventModelInterface, idx: number): any => {
