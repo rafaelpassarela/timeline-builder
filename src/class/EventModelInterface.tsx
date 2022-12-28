@@ -1,9 +1,7 @@
-interface EventModelInterface {
-    align: "left" | "right" | "auto";
-    date: string;
-    title: string;
-    subtitle?: string;
-    img?: string;
+import EventModelStorageInterface from "./EventModelStorageInterface";
+
+interface EventModelInterface extends EventModelStorageInterface {
+    editable: boolean;
 }
 
 export default EventModelInterface;

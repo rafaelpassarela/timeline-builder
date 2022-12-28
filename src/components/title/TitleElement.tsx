@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { TitleFormat } from "../../class/TitleFormat";
 
 interface TitleElementState {
     isEditing: boolean;
@@ -9,8 +10,8 @@ interface TitleElementState {
 interface TitleElementProp {
     text: string,
     editable?: boolean,
-    elemType: "h1" | "h5",
-    callback: (value: string, type: "h1" | "h5") => void;
+    elemType: TitleFormat,
+    callback: (value: string, type: TitleFormat) => void;
 }
 
 class TitleElement extends Component<TitleElementProp, TitleElementState> {
@@ -91,7 +92,7 @@ class TitleElement extends Component<TitleElementProp, TitleElementState> {
         if (type === "h1") {
             return (
                 <h1 className={textClassName} onClick={this.textClickHandler}>
-                    {text}
+                    {text}&nbsp;
                 </h1>
             );
          }
@@ -99,7 +100,7 @@ class TitleElement extends Component<TitleElementProp, TitleElementState> {
         // sub-title component (H5)
         return (
             <h5 className={textClassName} onClick={this.textClickHandler}>
-                {text}
+                {text}&nbsp;
             </h5>
         );
     }

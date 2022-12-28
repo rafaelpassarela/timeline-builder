@@ -15,6 +15,7 @@ class AppContainer extends Component<AppContainerProp, AppContainerState> {
 
     constructor(props: AppContainerProp) {
         super(props);
+
         this.state = {
             editable: false,
             titleConfig: {
