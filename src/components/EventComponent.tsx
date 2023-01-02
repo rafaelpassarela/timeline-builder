@@ -4,6 +4,7 @@ import EventModelInterface from '../class/EventModelInterface';
 import EventModelStorageInterface from '../class/EventModelStorageInterface';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Align } from '../class/Align';
 
 class Event extends Component<EventModelInterface, EventModelStorageInterface> {
 
@@ -20,51 +21,47 @@ class Event extends Component<EventModelInterface, EventModelStorageInterface> {
         };
     }
 
-    renderLeft() {
+    doRenderCol(align: Align) {
+        let itemId: string = "item-left";
+        let itemClass: string = "quarter-circle-top-left";
+        let itemImg: string = "eventIcon-left";
+
+        if (align === 'right') {
+            itemId = "item-right";
+            itemClass = "quarter-circle-top-right";
+            itemImg = "eventIcon-right";
+        }
+
+        const dummy   = <Col>{JSON.stringify(this.state, null, 2) }</Col>;
+        const content = (
+            <Col id={itemId} className={itemClass}>
+                <EventDetail
+                    date={this.props.date}
+                    title={this.props.title}
+                    subtitle={this.props.subtitle}
+                    img={this.props.img}
+                    imgClass={itemImg}
+                />
+            </Col>
+        );
+
+        let left  = (align === 'left'  ? content : dummy);
+        let right = (align === 'right' ? content : dummy);
+
         return (
             <Row>
-                <Col id="item-left" className="quarter-circle-top-left">
-                    <EventDetail
-                        date={this.props.date}
-                        title={this.props.title}
-                        subtitle={this.props.subtitle}
-                        img={this.props.img}
-                        imgClass="eventIcon-left"
-                    />
-                </Col>
-                <Col>{JSON.stringify(this.state, null, 2) }</Col>
+                {left}
+                {right}
             </Row>
         );
     }
-
-    renderRight() {
-        return (
-            <Row>
-                <Col>{JSON.stringify(this.state, null, 2) }</Col>
-                <Col id="item-right" className="quarter-circle-top-right">
-                    <EventDetail
-                        date={this.props.date}
-                        title={this.props.title}
-                        subtitle={this.props.subtitle}
-                        img={this.props.img}
-                        imgClass="eventIcon-right"
-                    />
-                </Col>
-            </Row>
-        );
-    }
-
 
     render() {
         const { align } = this.props;
 
-        if (align === 'left') {
-            return this.renderLeft();
-        }
-
-        return this.renderRight();
+        return this.doRenderCol(align);
     }
 
 }
 
-export default Event;
+export default Event; 
