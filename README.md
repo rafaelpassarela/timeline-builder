@@ -15,3 +15,7 @@ and `npm start`
 ## Contributions
 
 Please, make your own branch and do a MR, that's it.
+
+
+Icons provided by [React Icons](https://react-icons.github.io/react-icons)
+Build with [React Bootstrap](https://react-bootstrap.github.io/)

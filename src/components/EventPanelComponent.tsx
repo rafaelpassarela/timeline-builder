@@ -73,7 +73,7 @@ class EventPanel extends Component<EventPanelProps, TimelineStorageInterface> {
                                 title={val.title}
                                 subtitle={val.subtitle}
                                 img={val.img}
-                                editable={true}
+                                editable={this.props.titleConfig.editable!}
                             />
                         })
                     }

@@ -49,10 +49,37 @@ small {
 
 .eventIcon-right {
     position: relative;
-    /* top: -75px; */
-    /* left: 318px; */
     float: right;
     margin-left: 10px;
+}
+
+.event-edit-control-group-bg {
+    background-color: dimgray;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: -webkit-center;
+    min-width: 230px;
+    opacity: 50%;
+    position: absolute;
+    z-index: 99999999;
+}
+
+.event-edit-control-group-bg-right {
+    background-color: red;
+    left: -190px;
+    position: relative;
+    float: right;
+}
+
+.event-edit-control-group-bg:hover {
+    opacity: 100%;
+}
+
+.event-edit-control-group {
+    text-align: center;
+    max-width: 190px;
 }
 
 .spacer-left {
