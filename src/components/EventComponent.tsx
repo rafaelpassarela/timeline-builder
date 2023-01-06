@@ -6,6 +6,7 @@ import EventModelInterface from '../class/EventModelInterface';
 import EventModelStorageInterface from '../class/EventModelStorageInterface';
 import { Align } from '../class/Align';
 import VerticalButton from '../class/VerticalButton';
+import { EditButtonType } from '../class/EditButtonType';
 
 class Event extends Component<EventModelInterface, EventModelStorageInterface> {
 
@@ -20,6 +21,24 @@ class Event extends Component<EventModelInterface, EventModelStorageInterface> {
             img: this.props.img,
             index: this.props.index,
         };
+
+        this.verticalButtonHandler = this.verticalButtonHandler.bind(this);
+    }
+
+    verticalButtonHandler(action: EditButtonType) {
+        switch (action) {
+            case "up":
+            case "down":
+                const idx = this.state.index;
+                const newIdx = (action === 'down' ? idx + 1 : idx - 1);
+
+                this.props.callbacUpDown(idx, newIdx);
+                break;
+
+            default:
+                alert("not implemented " + action);
+                break;
+        }
     }
 
     getEditControls(editable: boolean, extraClass: string, index: number, total: number) {
@@ -28,11 +47,11 @@ class Event extends Component<EventModelInterface, EventModelStorageInterface> {
             return (
                 <div className={className}>
                     <div className="event-edit-control-group">
-                        <VerticalButton btnType="up" disabled={index === 0} />
-                        <VerticalButton btnType="down" disabled={index === total} />
-                        <VerticalButton btnType="delete" disabled={false} />
-                        <VerticalButton btnType="insert" disabled={false}/>
-                        <VerticalButton btnType="edit"  disabled={false}/>
+                        <VerticalButton btnType="up" disabled={index === 0} callback={this.verticalButtonHandler} />
+                        <VerticalButton btnType="down" disabled={index === total} callback={this.verticalButtonHandler} />
+                        <VerticalButton btnType="delete" disabled={false} callback={this.verticalButtonHandler} />
+                        <VerticalButton btnType="insert" disabled={false} callback={this.verticalButtonHandler} />
+                        <VerticalButton btnType="edit"  disabled={false} callback={this.verticalButtonHandler} />
                     </div>
                 </div>
             );
@@ -66,7 +85,7 @@ class Event extends Component<EventModelInterface, EventModelStorageInterface> {
             <Col id={itemId} className={itemClass}>
                 <EventDetail
                     date={this.props.date}
-                    title={this.props.title}
+                    title={this.props.index + '=' + this.props.title}
                     subtitle={this.props.subtitle}
                     img={this.props.img}
                     imgClass={itemImg}

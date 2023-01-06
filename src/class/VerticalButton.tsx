@@ -7,9 +7,16 @@ import { EditButtonType } from './EditButtonType';
 interface VerticalButtonProps {
     btnType: EditButtonType;
     disabled: boolean;
+    callback: (action: EditButtonType) => void;
 }
 
 class VerticalButton extends Component<VerticalButtonProps> {
+
+    constructor(props: VerticalButtonProps) {
+        super(props);
+
+        this.clickHandler = this.clickHandler.bind(this);
+    }
 
     getButton(type: EditButtonType) {
         switch (type) {
@@ -21,6 +28,10 @@ class VerticalButton extends Component<VerticalButtonProps> {
             default:
                 return null;
         }
+    }
+
+    clickHandler() {
+        this.props.callback(this.props.btnType);
     }
 
     getButtonVariant(type: EditButtonType) {
@@ -41,7 +52,7 @@ class VerticalButton extends Component<VerticalButtonProps> {
         const variant = this.getButtonVariant(btnType);
         return (
             <div className='spacer-bottom'>
-                <Button variant={variant} size="sm" disabled={this.props.disabled}>
+                <Button variant={variant} size="sm" disabled={this.props.disabled} onClick={this.clickHandler}>
                     {this.getButton(btnType)}
                 </Button>
             </div>
