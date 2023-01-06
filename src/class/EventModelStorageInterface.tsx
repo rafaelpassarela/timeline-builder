@@ -2,7 +2,7 @@ import { Align } from "./Align";
 
 interface EventModelStorageInterface {
     align: Align;
-    index?: number;
+    index: number;
     date: string;
     title: string;
     subtitle?: string;

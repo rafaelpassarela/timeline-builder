@@ -6,6 +6,7 @@ import { EditButtonType } from './EditButtonType';
 
 interface VerticalButtonProps {
     btnType: EditButtonType;
+    disabled: boolean;
 }
 
 class VerticalButton extends Component<VerticalButtonProps> {
@@ -40,7 +41,7 @@ class VerticalButton extends Component<VerticalButtonProps> {
         const variant = this.getButtonVariant(btnType);
         return (
             <div className='spacer-bottom'>
-                <Button variant={variant} size="sm">
+                <Button variant={variant} size="sm" disabled={this.props.disabled}>
                     {this.getButton(btnType)}
                 </Button>
             </div>

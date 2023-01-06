@@ -22,17 +22,17 @@ class Event extends Component<EventModelInterface, EventModelStorageInterface> {
         };
     }
 
-    getEditControls(editable: boolean, extraClass: string) {
+    getEditControls(editable: boolean, extraClass: string, index: number, total: number) {
         if (editable) {
             const className = 'event-edit-control-group-bg event-edit-control-group-bg-' + extraClass;
             return (
                 <div className={className}>
                     <div className="event-edit-control-group">
-                        <VerticalButton btnType="up" />
-                        <VerticalButton btnType="down" />
-                        <VerticalButton btnType="delete" />
-                        <VerticalButton btnType="insert" />
-                        <VerticalButton btnType="edit" />
+                        <VerticalButton btnType="up" disabled={index === 0} />
+                        <VerticalButton btnType="down" disabled={index === total} />
+                        <VerticalButton btnType="delete" disabled={false} />
+                        <VerticalButton btnType="insert" disabled={false}/>
+                        <VerticalButton btnType="edit"  disabled={false}/>
                     </div>
                 </div>
             );
@@ -42,7 +42,7 @@ class Event extends Component<EventModelInterface, EventModelStorageInterface> {
 
     }
 
-    doRenderCol(align: Align, editable: boolean) {
+    doRenderCol(align: Align, editable: boolean, index : number, total : number) {
         let itemId: string = "item-left";
         let itemClass: string = "quarter-circle-top-left";
         let itemImg: string = "eventIcon-left";
@@ -59,7 +59,7 @@ class Event extends Component<EventModelInterface, EventModelStorageInterface> {
         const colClass = (editable && extra === "left" ? "col-edit-left" : "");
         const dummy = (
             <Col className={colClass}>
-                {this.getEditControls(editable, extra)}
+                {this.getEditControls(editable, extra, index, total)}
             </Col>
         );
         const content = (
@@ -86,9 +86,9 @@ class Event extends Component<EventModelInterface, EventModelStorageInterface> {
     }
 
     render() {
-        const { align, editable } = this.props;
+        const { align, editable, index, total } = this.props;
 
-        return this.doRenderCol(align, editable);
+        return this.doRenderCol(align, editable, index, total);
     }
 
 }
