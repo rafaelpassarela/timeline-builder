@@ -15,7 +15,7 @@ interface EventPanelProps {
 const lorem = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum like abc abc.";
 
 const itens = Array<EventModelStorageInterface>(
-    {align: "auto", date: "21/01/2022", title: "Teste", subtitle: "Sub Teste"},
+    {align: "auto", date: "21/01/2022", title: "Teste", subtitle: lorem},
     {align: "auto", date: "20/01/2022", title: "Novo",  subtitle: lorem, img: "https://i.pinimg.com/474x/1a/00/cb/1a00cb023f90b759483168335c4246d6.jpg"},
     {align: "auto", date: "14/01/2022", title: "Teste Numero 2", subtitle: "Sub Teste 2"},
     {align: "auto", date: "11/01/2022", title: "Teste Numero 3", subtitle: "Sub Teste 3"},
@@ -54,7 +54,7 @@ class EventPanel extends Component<EventPanelProps, TimelineStorageInterface> {
 
         return (
             <div>
-                <pre>{JSON.stringify(this.state, null, 2) }</pre>
+                <pre>EVC: {JSON.stringify(this.state, null, 2) }</pre>
                 <Title
                     title={this.props.titleConfig.title}
                     subtitle={this.props.titleConfig.subtitle}

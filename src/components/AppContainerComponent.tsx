@@ -29,6 +29,7 @@ class AppContainer extends Component<AppContainerProp, AppContainerState> {
     render() {
         return (
             <div>
+                <div><pre>APC: {JSON.stringify(this.state, null, 2) }</pre></div>
                 <MainMenu />
                 <EventPanel titleConfig={ this.state.titleConfig }/>
             </div>

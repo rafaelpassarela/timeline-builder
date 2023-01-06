@@ -1,0 +1,1 @@
+export type EditButtonType = "up" | "down" | "delete" | "insert" | "edit";

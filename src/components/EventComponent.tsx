@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
-import { FaEdit, FaPlus, FaTrashAlt } from 'react-icons/fa';
-import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import EventDetail from './EventDetailComponent';
 import EventModelInterface from '../class/EventModelInterface';
 import EventModelStorageInterface from '../class/EventModelStorageInterface';
 import { Align } from '../class/Align';
+import VerticalButton from '../class/VerticalButton';
 
 class Event extends Component<EventModelInterface, EventModelStorageInterface> {
 
@@ -24,48 +22,48 @@ class Event extends Component<EventModelInterface, EventModelStorageInterface> {
         };
     }
 
-    getEditControls(extraClass: boolean) {
-        const className = 'event-edit-control-group-bg' + (extraClass ? ' event-edit-control-group-bg-right' : '');
-        return (
-            <div className={className}>
-                <div className="event-edit-control-group">
-                    <Button variant="secondary" size="sm">
-                        <AiFillCaretDown />
-                    </Button> {' '}
-                    <Button variant="secondary" size="sm">
-                        <AiFillCaretUp />
-                    </Button> {' '}
-                    <Button variant="danger" size="sm">
-                        <FaTrashAlt />
-                    </Button> {' '}
-                    <Button variant="warning" size="sm">
-                        <FaPlus />
-                    </Button> {' '}
-                    <Button variant="warning" size="sm">
-                        <FaEdit />
-                    </Button> {' '}
+    getEditControls(editable: boolean, extraClass: string) {
+        if (editable) {
+            const className = 'event-edit-control-group-bg event-edit-control-group-bg-' + extraClass;
+            return (
+                <div className={className}>
+                    <div className="event-edit-control-group">
+                        <VerticalButton btnType="up" />
+                        <VerticalButton btnType="down" />
+                        <VerticalButton btnType="delete" />
+                        <VerticalButton btnType="insert" />
+                        <VerticalButton btnType="edit" />
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
+
+        return null;
+
     }
 
     doRenderCol(align: Align, editable: boolean) {
         let itemId: string = "item-left";
         let itemClass: string = "quarter-circle-top-left";
         let itemImg: string = "eventIcon-left";
-        let extra: boolean = false;
+        let extra: string = "right";
 
         if (align === 'right') {
             itemId = "item-right";
             itemClass = "quarter-circle-top-right";
             itemImg = "eventIcon-right";
-            extra = true;
+            extra = "left";
         }
 
-        const dummy   = <Col></Col>;// <Col>{JSON.stringify(this.state, null, 2) }</Col>;
+        // const dummy   = <Col></Col>;// <Col>{JSON.stringify(this.state, null, 2) }</Col>;
+        const colClass = (editable && extra === "left" ? "col-edit-left" : "");
+        const dummy = (
+            <Col className={colClass}>
+                {this.getEditControls(editable, extra)}
+            </Col>
+        );
         const content = (
             <Col id={itemId} className={itemClass}>
-                {editable ? this.getEditControls(extra) : null}
                 <EventDetail
                     date={this.props.date}
                     title={this.props.title}
