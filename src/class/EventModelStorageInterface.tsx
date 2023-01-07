@@ -1,6 +1,6 @@
 import { Align } from "./Align";
 
-interface EventModelStorageInterface {
+interface IEventModelStorageInterface {
     align: Align;
     index: number;
     date: string;
@@ -10,4 +10,4 @@ interface EventModelStorageInterface {
 
 }
 
-export default EventModelStorageInterface;
+export default IEventModelStorageInterface;

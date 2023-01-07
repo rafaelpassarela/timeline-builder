@@ -1,10 +1,10 @@
 import { TitleFormat } from "./TitleFormat";
 
-interface TitleInterface {
+interface ITitleInterface {
   title: string;
   subtitle?: string;
   editable?: boolean;
   callback?: (value: string, type: TitleFormat) => void;
 }
 
-export default TitleInterface;
+export default ITitleInterface;

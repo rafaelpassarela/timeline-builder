@@ -1,13 +1,13 @@
-import EventModelStorageInterface from "./EventModelStorageInterface";
+import IEventModelStorageInterface from "./EventModelStorageInterface";
 
-interface TimeLineTitleStorage {
+interface ITimeLineTitleStorage {
 	title: string;
 	subtitle: string;
 }
 
-interface TimelineStorageInterface {
-	header: TimeLineTitleStorage;
-	events: Array<EventModelStorageInterface>;
+interface ITimelineStorageInterface {
+	header: ITimeLineTitleStorage;
+	events: Array<IEventModelStorageInterface>;
 }
 
-export default TimelineStorageInterface;
+export default ITimelineStorageInterface;

@@ -4,15 +4,15 @@ import { FaEdit, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import Button from 'react-bootstrap/Button';
 import { EditButtonType } from './EditButtonType';
 
-interface VerticalButtonProps {
+interface IVerticalButtonProps {
     btnType: EditButtonType;
     disabled: boolean;
     callback: (action: EditButtonType) => void;
 }
 
-class VerticalButton extends Component<VerticalButtonProps> {
+class VerticalButton extends Component<IVerticalButtonProps> {
 
-    constructor(props: VerticalButtonProps) {
+    constructor(props: IVerticalButtonProps) {
         super(props);
 
         this.clickHandler = this.clickHandler.bind(this);

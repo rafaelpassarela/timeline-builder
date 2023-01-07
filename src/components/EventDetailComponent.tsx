@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-interface EventDetailProps {
+interface IEventDetailProps {
   date: string;
   title: string;
   subtitle?: string;
@@ -8,7 +8,7 @@ interface EventDetailProps {
   imgClass?: string;
 }
 
-class EventDetail extends Component<EventDetailProps> {
+class EventDetail extends Component<IEventDetailProps> {
 
   getImgClassName(imgClass: string | undefined) {
     return 'eventIcon ' + (imgClass === undefined ? '' : imgClass);

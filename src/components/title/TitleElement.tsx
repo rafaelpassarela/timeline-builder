@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 import { TitleFormat } from "../../class/TitleFormat";
 
-interface TitleElementState {
+interface ITitleElementState {
     isEditing: boolean;
     text: string;
     editingText: string;
 }
 
-interface TitleElementProp {
+interface ITitleElementProp {
     text: string,
     editable?: boolean,
     elemType: TitleFormat,
     callback: (value: string, type: TitleFormat) => void;
 }
 
-class TitleElement extends Component<TitleElementProp, TitleElementState> {
+class TitleElement extends Component<ITitleElementProp, ITitleElementState> {
 
-    constructor(props: TitleElementProp) {
+    constructor(props: ITitleElementProp) {
         super(props);
         this.state = {
           isEditing: false,

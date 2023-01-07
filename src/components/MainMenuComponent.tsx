@@ -5,20 +5,20 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-interface MainMenuProps {
+interface IMainMenuProps {
 }
 
-interface MainMenuState {
+interface IMainMenuState {
     isOpen: boolean;
 }
 
-class MainMenu extends Component<MainMenuProps, MainMenuState> {
+class MainMenu extends Component<IMainMenuProps, IMainMenuState> {
 
     // const [isLoading, setLoading] = useState(false);
 
     // const handleClick = () => setLoading(true);
 
-    constructor(props: MainMenuProps) {
+    constructor(props: IMainMenuProps) {
         super(props);
         this.state = {
           isOpen: false

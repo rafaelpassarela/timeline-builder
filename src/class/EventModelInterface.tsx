@@ -1,11 +1,11 @@
-import EventModelStorageInterface from "./EventModelStorageInterface";
+import IEventModelStorageInterface from "./EventModelStorageInterface";
 
 export type EventHandlerUpDown = (currentIdx: number, newIndex: number) => void;
 
-interface EventModelInterface extends EventModelStorageInterface {
+interface IEventModelInterface extends IEventModelStorageInterface {
     editable: boolean;
     total: number;
     callbacUpDown: EventHandlerUpDown;
 }
 
-export default EventModelInterface;
+export default IEventModelInterface;

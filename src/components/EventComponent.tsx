@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import EventDetail from './EventDetailComponent';
-import EventModelInterface from '../class/EventModelInterface';
-import EventModelStorageInterface from '../class/EventModelStorageInterface';
+import IEventModelInterface from '../class/EventModelInterface';
+import IEventModelStorageInterface from '../class/EventModelStorageInterface';
 import { Align } from '../class/Align';
 import VerticalButton from '../class/VerticalButton';
 import { EditButtonType } from '../class/EditButtonType';
 
-class Event extends Component<EventModelInterface, EventModelStorageInterface> {
+class Event extends Component<IEventModelInterface, IEventModelStorageInterface> {
 
-    constructor(props: EventModelInterface) {
+    constructor(props: IEventModelInterface) {
         super(props);
 
         this.state = {
