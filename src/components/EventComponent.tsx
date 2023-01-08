@@ -32,9 +32,11 @@ class Event extends Component<IEventModelInterface, IEventModelStorageInterface>
                 const idx = this.state.index;
                 const newIdx = (action === 'down' ? idx + 1 : idx - 1);
 
-                this.props.callbacUpDown(idx, newIdx);
+                this.props.callbackUpDown(idx, newIdx);
                 break;
-
+            case "delete":
+                this.props.callbackDelete(this.state.index);
+                break;
             default:
                 alert("not implemented " + action);
                 break;

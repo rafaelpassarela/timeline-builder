@@ -35,6 +35,7 @@ class EventPanel extends Component<IEventPanelProps, ITimelineStorageInterface> 
         };
         this.titleChangeHandler = this.titleChangeHandler.bind(this);
         this.eventHandlerUpDown = this.eventHandlerUpDown.bind(this);
+        this.eventHandlerDelete = this.eventHandlerDelete.bind(this);
         this.orderArray = this.orderArray.bind(this);
     }
 
@@ -53,6 +54,15 @@ class EventPanel extends Component<IEventPanelProps, ITimelineStorageInterface> 
         }
     }
 
+    updateEventsArray(arr: Array<IEventModelStorageInterface>) {
+        // set new index to existing itens
+        this.orderArray(arr);
+        // update events state
+        this.setState({
+            events: arr
+        });
+    }
+
     orderArray(arr: Array<IEventModelStorageInterface>) {
         let idx = 0;
         arr.forEach(element => {
@@ -67,12 +77,15 @@ class EventPanel extends Component<IEventPanelProps, ITimelineStorageInterface> 
         // change element position
         list.splice(currentIdx, 1);
         list.splice(newIndex, 0, element);
-        // set new index to existing itens
-        this.orderArray(list);
-        // update events state
-        this.setState({
-            events: list
-        });
+
+        this.updateEventsArray(list);
+    }
+
+    eventHandlerDelete(index: number) {
+        let list = this.state.events;
+        list.splice(index, 1);
+
+        this.updateEventsArray(list);
     }
 
     render() {
@@ -102,7 +115,8 @@ class EventPanel extends Component<IEventPanelProps, ITimelineStorageInterface> 
                                 img={val.img}
                                 editable={this.props.editable}
                                 total={total}
-                                callbacUpDown={this.eventHandlerUpDown}
+                                callbackUpDown={this.eventHandlerUpDown}
+                                callbackDelete={this.eventHandlerDelete}
                             />
                         })
                     }
