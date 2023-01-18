@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import { FaEdit, FaPlus, FaTrashAlt } from 'react-icons/fa';
-import Button from 'react-bootstrap/Button';
 import { EditButtonType } from './EditButtonType';
 import DialogBox from './DialogBox';
-import IEventModelStorageInterface from './EventModelStorageInterface';
+import { IEventModelStorageScreenInterface } from './EventModelStorageInterface';
+import { Button, Col, Form, FormControl, FormGroup, FormLabel, FormText, Row } from 'react-bootstrap';
 
 interface IVerticalButtonProps {
     btnType: EditButtonType;
     disabled: boolean;
-    event: IEventModelStorageInterface,
+    event?: IEventModelStorageScreenInterface,
     callback: (action: EditButtonType) => void;
 }
 
@@ -19,6 +19,8 @@ interface IVerticalButtonState {
 
 class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonState> {
 
+    private editData: IEventModelStorageScreenInterface;
+
     constructor(props: IVerticalButtonProps) {
         super(props);
 
@@ -26,7 +28,15 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
             waitConfirmation: false
         }
 
+        this.editData = {
+            ...this.props.event!,
+            isNew: false
+        };
+
         this.clickHandler = this.clickHandler.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.getEditScreen = this.getEditScreen.bind(this);
+        this.editDialogHandler = this.editDialogHandler.bind(this);
         this.cancelDialogHandler = this.cancelDialogHandler.bind(this);
         this.deleteDialogHandler = this.deleteDialogHandler.bind(this);
     }
@@ -74,8 +84,16 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
         this.props.callback('delete');
     }
 
+    editDialogHandler() {
+        const test = JSON.stringify(this.editData);
+        alert(test);
+
+        this.cancelDialogHandler();
+        // this.props.callback('delete');
+    }
+
     getDeleteScreen() {
-        let eventTitle = (this.props.event.title);
+        let eventTitle = (this.props.event!.title);
         if (eventTitle.trim() === '') {
             eventTitle = 'No Title';
         }
@@ -94,17 +112,63 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
         );
     }
 
-    getEditcreen(isNew: boolean) {
+    handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+        e.preventDefault();
+        console.log(e.target.id + ' => ' + e.target.value);
+        console.log(JSON.stringify(this.editData));
+        this.editData = {
+            ...this.editData,
+            e.target.id : e.target.value
+        }
+    }
+
+    getEditScreen(newEvent: boolean) {
+        this.editData = (newEvent ? {
+            isNew: true,
+            align: 'auto',
+            date: '',
+            index: this.props.event!.index,
+            title: '',
+            img: '',
+            subtitle: ''
+        } :
+            this.props.event!
+        );
         return (
             <DialogBox
-                title='Edit/Insert'
+                title={newEvent ? 'Create New Event' : 'Edit Event'}
                 buttonCancelCaption='Cancel'
                 buttonOkCaption='Save'
                 show={true}
                 onCancelCallback={this.cancelDialogHandler}
-                onOkCallback={this.cancelDialogHandler}
+                onOkCallback={this.editDialogHandler}
             >
-                IsNew = {isNew ? 'SIM' : 'NOPE'}
+                <Form>
+                    <FormGroup controlId='title'>
+                        <FormLabel>Title</FormLabel>
+                        <FormControl placeholder='My New Event Title' defaultValue={this.editData.title} onChange={this.handleChange}/>
+                        <FormText>The event title is the highlighted sentence displayed in the timeline tree</FormText>
+                    </FormGroup>
+
+                    <FormGroup controlId="subtitle">
+                        <FormLabel>Description</FormLabel>
+                        <FormControl as="textarea" rows={10} placeholder="Once upon a time..." defaultValue={this.editData.subtitle} onChange={this.handleChange}/>
+                        <FormText>Tell us a little more about this event, as if you were telling us a story</FormText>
+                    </FormGroup>
+
+                    <FormGroup controlId='img' style={{marginTop: "10px"}}>
+                        <FormLabel>Imagem URL</FormLabel>
+                        <FormControl placeholder='https://myimage.com/test.png' defaultValue={this.editData.img} onChange={this.handleChange}/>
+                        <FormText>This field is not mandatory</FormText>
+                    </FormGroup>
+
+                    <FormGroup controlId="date" as={Row} style={{marginTop: "10px"}}>
+                        <FormLabel column sm="2">Date</FormLabel>
+                        <Col sm="10">
+                            <FormControl placeholder="dd/mm/yyyy" maxLength={10} defaultValue={this.editData.date} onChange={this.handleChange}/>
+                        </Col><br/>
+                    </FormGroup>
+                </Form>
             </DialogBox>
         );
     }
@@ -115,7 +179,7 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
             if (type === 'delete') {
                 screen = this.getDeleteScreen();
             } else {
-                screen = this.getEditcreen(type === 'insert');
+                screen = this.getEditScreen(type === 'insert');
             }
         }
 

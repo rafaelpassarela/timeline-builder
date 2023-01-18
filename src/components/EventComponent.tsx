@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import EventDetail from './EventDetailComponent';
 import IEventModelInterface from '../class/EventModelInterface';
-import IEventModelStorageInterface from '../class/EventModelStorageInterface';
+import IEventModelStorageInterface, { IEventModelStorageScreenInterface } from '../class/EventModelStorageInterface';
 import { Align } from '../class/Align';
 import VerticalButton from '../class/VerticalButton';
 import { EditButtonType } from '../class/EditButtonType';
@@ -46,7 +46,8 @@ class Event extends Component<IEventModelInterface, IEventModelStorageInterface>
     getEditControls(editable: boolean, extraClass: string, index: number, total: number) {
         if (editable) {
             const className = 'event-edit-control-group-bg event-edit-control-group-bg-' + extraClass;
-            const eventObj: IEventModelStorageInterface = {
+            const eventObj: IEventModelStorageScreenInterface = {
+                isNew: false,
                 ...this.props
             }
 
@@ -55,8 +56,8 @@ class Event extends Component<IEventModelInterface, IEventModelStorageInterface>
             return (
                 <div className={className}>
                     <div className="event-edit-control-group">
-                        <VerticalButton btnType="up" disabled={index === 0} callback={this.verticalButtonHandler} event={eventObj}/>
-                        <VerticalButton btnType="down" disabled={index === total} callback={this.verticalButtonHandler} event={eventObj}/>
+                        <VerticalButton btnType="up" disabled={index === 0} callback={this.verticalButtonHandler}/>
+                        <VerticalButton btnType="down" disabled={index === total} callback={this.verticalButtonHandler}/>
                         <VerticalButton btnType="delete" disabled={!canDelete} callback={this.verticalButtonHandler} event={eventObj}/>
                         <VerticalButton btnType="insert" disabled={false} callback={this.verticalButtonHandler} event={eventObj}/>
                         <VerticalButton btnType="edit"  disabled={false} callback={this.verticalButtonHandler} event={eventObj}/>

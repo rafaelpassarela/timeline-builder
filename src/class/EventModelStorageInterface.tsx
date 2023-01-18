@@ -7,7 +7,10 @@ interface IEventModelStorageInterface {
     title: string;
     subtitle?: string;
     img?: string;
+}
 
+export interface IEventModelStorageScreenInterface extends IEventModelStorageInterface {
+    isNew: boolean
 }
 
 export default IEventModelStorageInterface;
