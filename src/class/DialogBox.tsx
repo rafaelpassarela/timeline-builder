@@ -1,6 +1,7 @@
 import React, { Component, ReactNode } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'react-bootstrap';
+import { ButtonVariant } from 'react-bootstrap/types';
 
 interface IDialogBoxState {
     show: boolean
@@ -8,6 +9,10 @@ interface IDialogBoxState {
 
 interface IDialogBoxProps extends IDialogBoxState {
     title: string,
+    buttonOkCaption: string,
+    buttonOkVariant?: ButtonVariant,
+    buttonCancelCaption: string,
+    buttonCancelVariant?: ButtonVariant,
     children: ReactNode,
     onCancelCallback: () => void,
     onOkCallback: () => void
@@ -25,6 +30,8 @@ class DialogBox extends Component<IDialogBoxProps, IDialogBoxState> {
     }
 
     render() {
+        const okVariant     = (this.props.buttonOkVariant     ? this.props.buttonOkVariant     : "success");
+        const cancelVariant = (this.props.buttonCancelVariant ? this.props.buttonCancelVariant : "secondary");
         return (
             <Modal
                 autoFocus={true}
@@ -44,11 +51,11 @@ class DialogBox extends Component<IDialogBoxProps, IDialogBoxState> {
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button variant="secondary" onClick={this.props.onCancelCallback}>
-                        Close
+                    <Button variant={cancelVariant} onClick={this.props.onCancelCallback}>
+                        {this.props.buttonCancelCaption}
                     </Button>
-                    <Button variant="success" onClick={this.props.onOkCallback}>
-                        Understood
+                    <Button variant={okVariant} onClick={this.props.onOkCallback}>
+                        {this.props.buttonOkCaption}
                     </Button>
                 </ModalFooter>
             </Modal>

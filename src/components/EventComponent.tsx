@@ -46,14 +46,20 @@ class Event extends Component<IEventModelInterface, IEventModelStorageInterface>
     getEditControls(editable: boolean, extraClass: string, index: number, total: number) {
         if (editable) {
             const className = 'event-edit-control-group-bg event-edit-control-group-bg-' + extraClass;
+            const eventObj: IEventModelStorageInterface = {
+                ...this.props
+            }
+
+            const canDelete = this.props.index > 0 || (this.props.index === 0 && this.props.total > 0);
+
             return (
                 <div className={className}>
                     <div className="event-edit-control-group">
-                        <VerticalButton btnType="up" disabled={index === 0} callback={this.verticalButtonHandler} />
-                        <VerticalButton btnType="down" disabled={index === total} callback={this.verticalButtonHandler} />
-                        <VerticalButton btnType="delete" disabled={false} callback={this.verticalButtonHandler} />
-                        <VerticalButton btnType="insert" disabled={false} callback={this.verticalButtonHandler} />
-                        <VerticalButton btnType="edit"  disabled={false} callback={this.verticalButtonHandler} />
+                        <VerticalButton btnType="up" disabled={index === 0} callback={this.verticalButtonHandler} event={eventObj}/>
+                        <VerticalButton btnType="down" disabled={index === total} callback={this.verticalButtonHandler} event={eventObj}/>
+                        <VerticalButton btnType="delete" disabled={!canDelete} callback={this.verticalButtonHandler} event={eventObj}/>
+                        <VerticalButton btnType="insert" disabled={false} callback={this.verticalButtonHandler} event={eventObj}/>
+                        <VerticalButton btnType="edit"  disabled={false} callback={this.verticalButtonHandler} event={eventObj}/>
                     </div>
                 </div>
             );

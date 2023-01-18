@@ -4,10 +4,12 @@ import { FaEdit, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import Button from 'react-bootstrap/Button';
 import { EditButtonType } from './EditButtonType';
 import DialogBox from './DialogBox';
+import IEventModelStorageInterface from './EventModelStorageInterface';
 
 interface IVerticalButtonProps {
     btnType: EditButtonType;
     disabled: boolean;
+    event: IEventModelStorageInterface,
     callback: (action: EditButtonType) => void;
 }
 
@@ -25,7 +27,8 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
         }
 
         this.clickHandler = this.clickHandler.bind(this);
-        this.deleteCancelDialog = this.deleteCancelDialog.bind(this);
+        this.cancelDialogHandler = this.cancelDialogHandler.bind(this);
+        this.deleteDialogHandler = this.deleteDialogHandler.bind(this);
     }
 
     getButton(type: EditButtonType) {
@@ -60,21 +63,33 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
         }
     }
 
-    deleteCancelDialog() {
+    cancelDialogHandler() {
         this.setState({
             waitConfirmation: false
         });
     }
 
+    deleteDialogHandler() {
+        this.cancelDialogHandler();
+        this.props.callback('delete');
+    }
+
     getDeleteScreen() {
+        let eventTitle = (this.props.event.title);
+        if (eventTitle.trim() === '') {
+            eventTitle = 'No Title';
+        }
         return (
             <DialogBox
                 title='Remove Event?'
+                buttonCancelCaption='Cancel'
+                buttonOkCaption='Yes, Remove!'
+                buttonOkVariant='danger'
                 show={true}
-                onCancelCallback={this.deleteCancelDialog}
-                onOkCallback={this.deleteCancelDialog}
+                onCancelCallback={this.cancelDialogHandler}
+                onOkCallback={this.deleteDialogHandler}
             >
-                DEL
+                Do you really want to remove the <b>"{eventTitle}"</b> event?
             </DialogBox>
         );
     }
@@ -83,9 +98,11 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
         return (
             <DialogBox
                 title='Edit/Insert'
+                buttonCancelCaption='Cancel'
+                buttonOkCaption='Save'
                 show={true}
-                onCancelCallback={this.deleteCancelDialog}
-                onOkCallback={this.deleteCancelDialog}
+                onCancelCallback={this.cancelDialogHandler}
+                onOkCallback={this.cancelDialogHandler}
             >
                 IsNew = {isNew ? 'SIM' : 'NOPE'}
             </DialogBox>
