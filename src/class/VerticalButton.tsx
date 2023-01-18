@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import { FaEdit, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import Button from 'react-bootstrap/Button';

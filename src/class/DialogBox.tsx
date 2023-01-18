@@ -1,8 +1,5 @@
-import { Component } from 'react';
-import Container from 'react-bootstrap/Container';
+import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'react-bootstrap';
 
 interface IDialogBoxState {
@@ -25,29 +22,6 @@ class DialogBox extends Component<IDialogBoxProps, IDialogBoxState> {
 
         }
     }
-
-/*
-<Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          I will not close if you click outside me. Don't even try to press
-          escape key.
-        </Modal.Body>
-        <Modal.Footer>
-
-        </Modal.Footer>
-      </Modal>
-
-*/
-
 
     render() {
         return (
