@@ -3,6 +3,7 @@ import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import { FaEdit, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import Button from 'react-bootstrap/Button';
 import { EditButtonType } from './EditButtonType';
+import DialogBox from './DialogBox';
 
 interface IVerticalButtonProps {
     btnType: EditButtonType;
@@ -10,12 +11,21 @@ interface IVerticalButtonProps {
     callback: (action: EditButtonType) => void;
 }
 
-class VerticalButton extends Component<IVerticalButtonProps> {
+interface IVerticalButtonState {
+    waitConfirmation: boolean
+}
+
+class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonState> {
 
     constructor(props: IVerticalButtonProps) {
         super(props);
 
+        this.state = {
+            waitConfirmation: false
+        }
+
         this.clickHandler = this.clickHandler.bind(this);
+        this.deleteCancelDialog = this.deleteCancelDialog.bind(this);
     }
 
     getButton(type: EditButtonType) {
@@ -31,7 +41,43 @@ class VerticalButton extends Component<IVerticalButtonProps> {
     }
 
     clickHandler() {
-        this.props.callback(this.props.btnType);
+        switch (this.props.btnType) {
+            case 'up':
+            case 'down':
+                this.props.callback(this.props.btnType);
+                break;
+
+            case "delete":
+                this.setState({
+                    waitConfirmation: true
+                });
+
+                break;
+
+            default:
+
+                break;
+        }
+    }
+
+    deleteCancelDialog() {
+        this.setState({
+            waitConfirmation: false
+        });
+    }
+
+    getContextScreen(type: EditButtonType) {
+        if (this.state.waitConfirmation === true) {
+            return (
+                <DialogBox
+                    title='Remove Event?'
+                    show={true}
+                    onCancelCallback={this.deleteCancelDialog}
+                    onOkCallback={this.deleteCancelDialog} />
+            );
+        }
+
+        return null;
     }
 
     getButtonVariant(type: EditButtonType) {
@@ -50,11 +96,13 @@ class VerticalButton extends Component<IVerticalButtonProps> {
     render() {
         const { btnType } = this.props;
         const variant = this.getButtonVariant(btnType);
+        const contextScreen = this.getContextScreen(btnType);
         return (
             <div className='spacer-bottom'>
                 <Button variant={variant} size="sm" disabled={this.props.disabled} onClick={this.clickHandler}>
                     {this.getButton(btnType)}
                 </Button>
+                {contextScreen}
             </div>
         );
     }

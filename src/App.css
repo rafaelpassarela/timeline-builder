@@ -23,7 +23,7 @@
     border: 1px solid whitesmoke;
     background-color: aliceblue;
     box-shadow: 0px 10px 9px 0px;
-    z-index: 9;
+    z-index: 100;
 }
 
 .eventText {
@@ -52,11 +52,7 @@ small {
     max-width: 42px;
     padding-top: 4px;
     padding-bottom: 25px;
-    opacity: 50%;
-}
-
-.event-edit-control-group-bg:hover {
-    opacity: 100%;
+    /* opacity: 50%; */
 }
 
 .event-edit-control-group-bg-right {
