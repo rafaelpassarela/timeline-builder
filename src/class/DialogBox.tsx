@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'react-bootstrap';
 
@@ -8,6 +8,7 @@ interface IDialogBoxState {
 
 interface IDialogBoxProps extends IDialogBoxState {
     title: string,
+    children: ReactNode,
     onCancelCallback: () => void,
     onOkCallback: () => void
 }
@@ -39,7 +40,7 @@ class DialogBox extends Component<IDialogBoxProps, IDialogBoxState> {
                 </ModalHeader>
 
                 <ModalBody>
-                    Aqui deve carregar os elementos filhos
+                    {this.props.children}
                 </ModalBody>
 
                 <ModalFooter>

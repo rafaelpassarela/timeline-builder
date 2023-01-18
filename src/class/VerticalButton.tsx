@@ -47,15 +47,15 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
                 this.props.callback(this.props.btnType);
                 break;
 
-            case "delete":
+            case 'delete':
+            case 'insert':
+            case 'edit':
                 this.setState({
                     waitConfirmation: true
                 });
-
                 break;
 
             default:
-
                 break;
         }
     }
@@ -66,18 +66,43 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
         });
     }
 
+    getDeleteScreen() {
+        return (
+            <DialogBox
+                title='Remove Event?'
+                show={true}
+                onCancelCallback={this.deleteCancelDialog}
+                onOkCallback={this.deleteCancelDialog}
+            >
+                DEL
+            </DialogBox>
+        );
+    }
+
+    getEditcreen(isNew: boolean) {
+        return (
+            <DialogBox
+                title='Edit/Insert'
+                show={true}
+                onCancelCallback={this.deleteCancelDialog}
+                onOkCallback={this.deleteCancelDialog}
+            >
+                IsNew = {isNew ? 'SIM' : 'NOPE'}
+            </DialogBox>
+        );
+    }
+
     getContextScreen(type: EditButtonType) {
+        let screen = null;
         if (this.state.waitConfirmation === true) {
-            return (
-                <DialogBox
-                    title='Remove Event?'
-                    show={true}
-                    onCancelCallback={this.deleteCancelDialog}
-                    onOkCallback={this.deleteCancelDialog} />
-            );
+            if (type === 'delete') {
+                screen = this.getDeleteScreen();
+            } else {
+                screen = this.getEditcreen(type === 'insert');
+            }
         }
 
-        return null;
+        return screen;
     }
 
     getButtonVariant(type: EditButtonType) {
