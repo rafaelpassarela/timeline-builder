@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import TitleInterface from "../../class/TitleComponentInterface";
+import ITitleInterface from "../../class/TitleComponentInterface";
+import { TitleFormat } from "../../class/TitleFormat";
 import TitleElement from "./TitleElement";
 
-class Title extends Component<TitleInterface> {
+class Title extends Component<ITitleInterface> {
 
-    constructor(props: TitleInterface) {
+    constructor(props: ITitleInterface) {
         super(props);
 
         this.callbackHandler = this.callbackHandler.bind(this);
     }
 
-    callbackHandler(value: string, type: "h1" | "h5") {
+    callbackHandler(value: string, type: TitleFormat) {
         this.props.callback!(value, type);
     }
 

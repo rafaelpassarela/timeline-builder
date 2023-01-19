@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-interface EventDetailProps {
+interface IEventDetailProps {
   date: string;
   title: string;
   subtitle?: string;
@@ -8,7 +8,7 @@ interface EventDetailProps {
   imgClass?: string;
 }
 
-class EventDetail extends Component<EventDetailProps> {
+class EventDetail extends Component<IEventDetailProps> {
 
   getImgClassName(imgClass: string | undefined) {
     return 'eventIcon ' + (imgClass === undefined ? '' : imgClass);
@@ -16,7 +16,7 @@ class EventDetail extends Component<EventDetailProps> {
 
   render() {
     const { date, title, subtitle, img, imgClass } = this.props;
-    var imgTag = (img === undefined) ? null : <img className={this.getImgClassName(imgClass)} src={img} alt="Event Logo"/>;
+    var imgTag = (img === undefined || img === '') ? null : <img className={this.getImgClassName(imgClass)} src={img} alt="Event Logo"/>;
     var spacer = (imgClass === 'eventIcon-right' ) ?
         <div className="spacer-right"></div> :
         <div className="spacer-left"></div>;

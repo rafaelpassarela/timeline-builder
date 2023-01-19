@@ -1,5 +1,5 @@
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 .base-line {
@@ -10,7 +10,6 @@
 }
 
 .eventComp {
-    /* border: 1px solid lightsteelblue; */
     border-radius: 8px;
     padding: 6px;
     max-width: 80%;
@@ -18,21 +17,17 @@
 }
 
 .eventIcon {
-    /* border-radius: 50%; */
     border-radius: 8px;
     min-width: 150px;
     max-width: 150px;
-    /* border: 5px solid lightsteelblue; */
-    /* border: 5px solid #62656a; */
     border: 1px solid whitesmoke;
     background-color: aliceblue;
     box-shadow: 0px 10px 9px 0px;
-    z-index: 9;
+    z-index: 100;
 }
 
 .eventText {
     text-align: justify;
-    /* font-size: large; */
 }
 
 small {
@@ -41,18 +36,49 @@ small {
 
 .eventIcon-left {
     position: relative;
-    /* top: -75px; */
-    /* left: -316px; */
     float: left;
     margin-right: 10px;
 }
 
 .eventIcon-right {
     position: relative;
-    /* top: -75px; */
-    /* left: 318px; */
     float: right;
     margin-left: 10px;
+}
+
+.event-edit-control-group-bg {
+    background-color: whitesmoke;
+    min-width: 42px;
+    max-width: 42px;
+    padding-top: 4px;
+    padding-bottom: 25px;
+    /* opacity: 50%; */
+}
+
+.event-edit-control-group-bg-right {
+    border-bottom-right-radius: 50px;
+    position: relative;
+    left: -12px;
+}
+
+.event-edit-control-group-bg-left {
+    border-bottom-left-radius: 50px;
+}
+
+.col-edit-left {
+    display: flex;
+    left: 22px;
+    position: sticky;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.event-edit-control-group {
+    text-align: center;
+}
+
+.spacer-bottom {
+    margin-bottom: 4px;
 }
 
 .spacer-left {
@@ -76,7 +102,6 @@ small {
 }
 
 .Root {
-    /* background-color: rgb(145, 145, 145); */
     color: whitesmoke;
 }
 
@@ -110,43 +135,38 @@ small {
 
 .quarter-circle-top-left{
     width: 100px;
-    /* height: 100px; */
-    /* background: red; old color #282c34*/
     background-image: linear-gradient(to right, #62656a, #252526);
     border-radius: 0 0 75px 0;
     -moz-border-radius: 0 0 75px 0;
     -webkit-border-radius: 0 0 75px 0;
 }
 .quarter-circle-top-right{
-     width: 100px;
-     /* height: 100px; */
-     /* background: blue; old color #282c34*/
-     background-image: linear-gradient(to left, #62656a, #252526);
-     border-radius: 0 0 0 75px;
-     -moz-border-radius: 0 0 0 75px;
-     -webkit-border-radius: 0 0 0 75px;
+    width: 100px;
+    background-image: linear-gradient(to left, #62656a, #252526);
+    border-radius: 0 0 0 75px;
+    -moz-border-radius: 0 0 0 75px;
+    -webkit-border-radius: 0 0 0 75px;
 }
 .quarter-circle-bottom-left{
-     width: 100px;
-     height: 100px;
-     background: green;
-     border-radius: 0 75px 0 0;
-     -moz-border-radius: 0 75px 0 0;
-     -webkit-border-radius: 0 75px 0 0;
-}
-.quarter-circle-bottom-right{
-     width: 100px;
-     height: 100px;
-     background: orange;
-     border-radius: 75px 0 0 0;
-     -moz-border-radius: 75px 0 0 0;
-     -webkit-border-radius: 75px 0 0 0;
+    width: 100px;
+    height: 100px;
+    background: green;
+    border-radius: 0 75px 0 0;
+    -moz-border-radius: 0 75px 0 0;
+    -webkit-border-radius: 0 75px 0 0;
+
+}.quarter-circle-bottom-right{
+    width: 100px;
+    height: 100px;
+    background: orange;
+    border-radius: 75px 0 0 0;
+    -moz-border-radius: 75px 0 0 0;
+    -webkit-border-radius: 75px 0 0 0;
 }
 
 #item-left {
-  border-right: 2px solid white;
-  /* text-align: right; */
-  text-align: -webkit-right;
+    border-right: 2px solid white;
+    text-align: -webkit-right;
 }
 
 #item-right {
