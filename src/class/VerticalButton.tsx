@@ -10,7 +10,7 @@ interface IVerticalButtonProps {
     btnType: EditButtonType;
     disabled: boolean;
     event?: IEventModelStorageScreenInterface,
-    callback: (action: EditButtonType) => void;
+    callback: (action: EditButtonType, object: IEventModelStorageScreenInterface | null) => void;
 }
 
 interface IVerticalButtonState {
@@ -57,7 +57,7 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
         switch (this.props.btnType) {
             case 'up':
             case 'down':
-                this.props.callback(this.props.btnType);
+                this.props.callback(this.props.btnType, null);
                 break;
 
             case 'delete':
@@ -81,15 +81,14 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
 
     deleteDialogHandler() {
         this.cancelDialogHandler();
-        this.props.callback('delete');
+        this.props.callback('delete', null);
     }
 
     editDialogHandler() {
-        const test = JSON.stringify(this.editData);
-        alert(test);
-
+        const action = (this.editData.isNew ? 'insert' : 'edit');
         this.cancelDialogHandler();
-        // this.props.callback('delete');
+
+        this.props.callback(action, this.editData);
     }
 
     getDeleteScreen() {
@@ -114,11 +113,9 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
 
     handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
-        console.log(e.target.id + ' => ' + e.target.value);
-        console.log(JSON.stringify(this.editData));
         this.editData = {
             ...this.editData,
-            e.target.id : e.target.value
+            [e.target.id] : e.target.value
         }
     }
 
@@ -157,8 +154,8 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
                     </FormGroup>
 
                     <FormGroup controlId='img' style={{marginTop: "10px"}}>
-                        <FormLabel>Imagem URL</FormLabel>
-                        <FormControl placeholder='https://myimage.com/test.png' defaultValue={this.editData.img} onChange={this.handleChange}/>
+                        <FormLabel>Imagem URL or Image Data</FormLabel>
+                        <FormControl placeholder='https://myimage.com/test.png or data:image/....' defaultValue={this.editData.img} onChange={this.handleChange}/>
                         <FormText>This field is not mandatory</FormText>
                     </FormGroup>
 

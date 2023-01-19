@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Container from "react-bootstrap/Container";
-import IEventModelStorageInterface from "../class/EventModelStorageInterface";
+import IEventModelStorageInterface, { IEventModelStorageScreenInterface } from "../class/EventModelStorageInterface";
 import ITimelineStorageInterface from "../class/TimelineStorageInterface";
 import { Align } from "../class/Align";
 import { TitleFormat } from "../class/TitleFormat";
@@ -33,10 +33,12 @@ class EventPanel extends Component<IEventPanelProps, ITimelineStorageInterface> 
             },
             events: itens
         };
+
+        this.orderArray = this.orderArray.bind(this);
         this.titleChangeHandler = this.titleChangeHandler.bind(this);
         this.eventHandlerUpDown = this.eventHandlerUpDown.bind(this);
         this.eventHandlerDelete = this.eventHandlerDelete.bind(this);
-        this.orderArray = this.orderArray.bind(this);
+        this.eventHandlerInsert = this.eventHandlerInsert.bind(this);
     }
 
     titleChangeHandler(value: string, type: TitleFormat) {
@@ -89,13 +91,33 @@ class EventPanel extends Component<IEventPanelProps, ITimelineStorageInterface> 
         }
     }
 
+    eventHandlerInsert(object: IEventModelStorageScreenInterface) {
+        let list = this.state.events;
+        // remove old element
+        if (!object.isNew) {
+            list.splice(object.index, 1);
+        }
+        // insert new one, converting from IEventModelStorageScreenInterface to IEventModelStorageInterface
+        const newEvent: IEventModelStorageInterface = {
+            index: (object.isNew ? object.index + 1 : object.index),
+            align: "auto",
+            date: object.date,
+            title: object.title,
+            subtitle: object.subtitle,
+            img: object.img
+        }
+
+        list.splice(newEvent.index, 0, newEvent);
+
+        this.updateEventsArray(list);
+    }
+
     render() {
         let lastAlign = "right" as Align;
         let total = this.state.events.length - 1;
 
         return (
             <div>
-                <pre>EVC: {JSON.stringify(this.state, null, 2) }</pre>
                 <Title
                     title={this.state.header.title}
                     subtitle={this.state.header.subtitle}
@@ -118,6 +140,7 @@ class EventPanel extends Component<IEventPanelProps, ITimelineStorageInterface> 
                                 total={total}
                                 callbackUpDown={this.eventHandlerUpDown}
                                 callbackDelete={this.eventHandlerDelete}
+                                callbackInsert={this.eventHandlerInsert}
                             />
                         })
                     }

@@ -25,7 +25,7 @@ class Event extends Component<IEventModelInterface, IEventModelStorageInterface>
         this.verticalButtonHandler = this.verticalButtonHandler.bind(this);
     }
 
-    verticalButtonHandler(action: EditButtonType) {
+    verticalButtonHandler(action: EditButtonType, object: IEventModelStorageScreenInterface | null) {
         switch (action) {
             case "up":
             case "down":
@@ -36,6 +36,10 @@ class Event extends Component<IEventModelInterface, IEventModelStorageInterface>
                 break;
             case "delete":
                 this.props.callbackDelete(this.state.index);
+                break;
+            case "edit":
+            case "insert":
+                this.props.callbackInsert(object!);
                 break;
             default:
                 alert("not implemented " + action);
@@ -83,7 +87,6 @@ class Event extends Component<IEventModelInterface, IEventModelStorageInterface>
             extra = "left";
         }
 
-        // const dummy   = <Col></Col>;// <Col>{JSON.stringify(this.state, null, 2) }</Col>;
         const colClass = (editable && extra === "left" ? "col-edit-left" : "");
         const dummy = (
             <Col className={colClass}>
@@ -94,7 +97,7 @@ class Event extends Component<IEventModelInterface, IEventModelStorageInterface>
             <Col id={itemId} className={itemClass}>
                 <EventDetail
                     date={this.props.date}
-                    title={this.props.index + '=' + this.props.title}
+                    title={this.props.title}
                     subtitle={this.props.subtitle}
                     img={this.props.img}
                     imgClass={itemImg}

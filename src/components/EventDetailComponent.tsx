@@ -16,7 +16,7 @@ class EventDetail extends Component<IEventDetailProps> {
 
   render() {
     const { date, title, subtitle, img, imgClass } = this.props;
-    var imgTag = (img === undefined) ? null : <img className={this.getImgClassName(imgClass)} src={img} alt="Event Logo"/>;
+    var imgTag = (img === undefined || img === '') ? null : <img className={this.getImgClassName(imgClass)} src={img} alt="Event Logo"/>;
     var spacer = (imgClass === 'eventIcon-right' ) ?
         <div className="spacer-right"></div> :
         <div className="spacer-left"></div>;
