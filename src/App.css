@@ -1,9 +1,32 @@
-.App-link {
-    color: #61dafb;
+/*
+code change CSS color
+https://spacejelly.dev/posts/how-to-create-css-custom-properties-that-dynamically-update-with-react-javascript/
+*/
+
+:root {
+    --background-color: #62656a;
+    --font-color: whitesmoke;
+    --line-color: white;
+    --image-border: whitesmoke;
+    --image-background: aliceblue;
+    --tl-title-color: white;
+    --tl-subtitle-color: white;
+}
+
+.main-body {
+    background-color: var(--background-color);
+    padding: 10px;
+}
+
+.root {
+    color: var(--font-color);
 }
 
 .base-line {
-    background-image: linear-gradient(white, white);
+    background-image: linear-gradient(
+        var(--line-color),
+        var(--line-color)
+    );
     background-size: 2px 100%;
     background-repeat: no-repeat;
     background-position: center center;
@@ -20,8 +43,8 @@
     border-radius: 8px;
     min-width: 150px;
     max-width: 150px;
-    border: 1px solid whitesmoke;
-    background-color: aliceblue;
+    border: 1px solid var(--image-border);
+    background-color: var(--image-background);
     box-shadow: 0px 10px 9px 0px;
     z-index: 100;
 }
@@ -47,7 +70,7 @@ small {
 }
 
 .event-edit-control-group-bg {
-    background-color: whitesmoke;
+    background-color: var(--line-color);
     min-width: 42px;
     max-width: 42px;
     padding-top: 4px;
@@ -83,30 +106,24 @@ small {
 
 .spacer-left {
     background-color: #ffffff00;
-    min-height: 6px;
+    min-height: 13px;
     min-width: 40px;
     float: none;
 }
 
 .spacer-right {
     background-color: #ffffff00;
-    min-height: 1px;
+    min-height: 20px;
     min-width: 40px;
     float: left;
 }
 
-.GuideLine {
-    position: absolute;
-    width: 20px;
-    height: 100%;
+.title-config {
+    color: var(--tl-title-color);
 }
 
-.Root {
-    color: whitesmoke;
-}
-
-.center {
-    text-align: center;
+.subtitle-config {
+    color: var(--tl-subtitle-color);
 }
 
 .title {
@@ -123,53 +140,42 @@ small {
 }
 
 .title-edit:hover {
-    background-color: #585b5f;
+    filter: brightness(85%);
     cursor: pointer;
 }
 
 .title-input {
     width: 100%;
-    color: white;
-    background-color: #62656a;
+    background-color: var(--background-color);
 }
 
 .quarter-circle-top-left{
     width: 100px;
-    background-image: linear-gradient(to right, #62656a, #252526);
+    background-image: linear-gradient(
+        to right,
+        var(--background-color),
+        #252526);
     border-radius: 0 0 75px 0;
     -moz-border-radius: 0 0 75px 0;
     -webkit-border-radius: 0 0 75px 0;
 }
 .quarter-circle-top-right{
     width: 100px;
-    background-image: linear-gradient(to left, #62656a, #252526);
+    background-image: linear-gradient(
+        to left,
+        var(--background-color),
+        #252526);
     border-radius: 0 0 0 75px;
     -moz-border-radius: 0 0 0 75px;
     -webkit-border-radius: 0 0 0 75px;
 }
-.quarter-circle-bottom-left{
-    width: 100px;
-    height: 100px;
-    background: green;
-    border-radius: 0 75px 0 0;
-    -moz-border-radius: 0 75px 0 0;
-    -webkit-border-radius: 0 75px 0 0;
-
-}.quarter-circle-bottom-right{
-    width: 100px;
-    height: 100px;
-    background: orange;
-    border-radius: 75px 0 0 0;
-    -moz-border-radius: 75px 0 0 0;
-    -webkit-border-radius: 75px 0 0 0;
-}
 
 #item-left {
-    border-right: 2px solid white;
+    border-right: 2px solid var(--line-color);
     text-align: -webkit-right;
 }
 
 #item-right {
-    border-left: 2px solid white;
+    border-left: 2px solid var(--line-color);
     text-align: start;
 }
