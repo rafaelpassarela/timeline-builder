@@ -9,6 +9,7 @@ interface IDialogBoxState {
 
 interface IDialogBoxProps extends IDialogBoxState {
     title: string,
+    large?: boolean,
     buttonOkCaption: string,
     buttonOkVariant?: ButtonVariant,
     buttonCancelCaption: string,
@@ -30,8 +31,9 @@ class DialogBox extends Component<IDialogBoxProps, IDialogBoxState> {
     }
 
     render() {
-        const okVariant     = (this.props.buttonOkVariant     ? this.props.buttonOkVariant     : "success");
-        const cancelVariant = (this.props.buttonCancelVariant ? this.props.buttonCancelVariant : "secondary");
+        const modalSize     = (this.props.large ? 'lg' : undefined);
+        const okVariant     = (this.props.buttonOkVariant     ? this.props.buttonOkVariant     : 'success');
+        const cancelVariant = (this.props.buttonCancelVariant ? this.props.buttonCancelVariant : 'secondary');
         return (
             <Modal
                 autoFocus={true}
@@ -39,6 +41,7 @@ class DialogBox extends Component<IDialogBoxProps, IDialogBoxState> {
                 keyboard={true}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
+                size={modalSize}
                 show={this.state.show}
                 onHide={this.props.onCancelCallback}
             >

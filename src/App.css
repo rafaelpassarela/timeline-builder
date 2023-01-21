@@ -11,6 +11,7 @@ https://spacejelly.dev/posts/how-to-create-css-custom-properties-that-dynamicall
     --image-background: aliceblue;
     --tl-title-color: white;
     --tl-subtitle-color: white;
+    --card-color: #252526;
 }
 
 .main-body {
@@ -154,7 +155,7 @@ small {
     background-image: linear-gradient(
         to right,
         var(--background-color),
-        #252526);
+        var(--card-color));
     border-radius: 0 0 75px 0;
     -moz-border-radius: 0 0 75px 0;
     -webkit-border-radius: 0 0 75px 0;
@@ -164,7 +165,7 @@ small {
     background-image: linear-gradient(
         to left,
         var(--background-color),
-        #252526);
+        var(--card-color));
     border-radius: 0 0 0 75px;
     -moz-border-radius: 0 0 0 75px;
     -webkit-border-radius: 0 0 0 75px;
