@@ -5,12 +5,12 @@ https://spacejelly.dev/posts/how-to-create-css-custom-properties-that-dynamicall
 
 :root {
     --background-color: #62656a;
-    --font-color: whitesmoke;
-    --line-color: white;
-    --image-border: whitesmoke;
-    --image-background: aliceblue;
-    --tl-title-color: white;
-    --tl-subtitle-color: white;
+    --font-color: #f5f5f5;
+    --line-color: #ffffff;
+    --image-border: #f5f5f5;
+    --image-background: #f0f8ff;
+    --tl-title-color: #ffffff;
+    --tl-subtitle-color: #ffffff;
     --card-color: #252526;
 }
 
@@ -148,6 +148,25 @@ small {
 .title-input {
     width: 100%;
     background-color: var(--background-color);
+}
+
+.expand-config {
+    color: #252526;
+    background-color: white;
+    border-bottom-left-radius: 12px;
+    border-top-left-radius: 12px;
+    min-height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 15px;
+    right: 0;
+}
+
+.expand-config:hover {
+    filter: brightness(85%);
+    cursor: pointer;
 }
 
 .quarter-circle-top-left{

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import IEventModelStorageInterface from "../class/EventModelStorageInterface";
 import ITimelineStorageInterface from "../class/TimelineStorageInterface";
+import ConfigComponent from "./ConfigComponent";
 import EventPanel from "./EventPanelComponent";
 // import MainMenu from "./MainMenuComponent";
 
@@ -38,6 +39,7 @@ class AppContainer extends Component {
         const timelineData = this.getTimeline();
         return (
             <div>
+                <ConfigComponent enabled={this.isEditable}/>
                 {/* <MainMenu /> */}
                 <EventPanel editable={this.isEditable} timeline={timelineData}/>
             </div>
