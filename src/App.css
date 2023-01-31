@@ -190,6 +190,10 @@ small {
     -webkit-border-radius: 0 0 0 75px;
 }
 
+.offcanvas-backdrop.show {
+    opacity: -0.4 !important;
+}
+
 #item-left {
     border-right: 2px solid var(--line-color);
     text-align: -webkit-right;
