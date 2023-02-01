@@ -6,6 +6,7 @@ import { Align } from "../class/Align";
 import { TitleFormat } from "../class/TitleFormat";
 import Event from "./EventComponent";
 import Title from "./title/TitleComponent";
+import ConfigComponent from "./ConfigComponent";
 
 interface IEventPanelProps {
     editable: boolean,
@@ -17,6 +18,7 @@ class EventPanel extends Component<IEventPanelProps, ITimelineStorageInterface> 
     constructor(props: IEventPanelProps) {
         super(props);
         this.state = {
+            config: this.props.timeline.config,
             header: {
                 ...this.props.timeline.header
             },
@@ -28,6 +30,7 @@ class EventPanel extends Component<IEventPanelProps, ITimelineStorageInterface> 
         this.eventHandlerUpDown = this.eventHandlerUpDown.bind(this);
         this.eventHandlerDelete = this.eventHandlerDelete.bind(this);
         this.eventHandlerInsert = this.eventHandlerInsert.bind(this);
+        this.configChangeHandler = this.configChangeHandler.bind(this);
     }
 
     titleChangeHandler(value: string, type: TitleFormat) {
@@ -43,6 +46,15 @@ class EventPanel extends Component<IEventPanelProps, ITimelineStorageInterface> 
             default:
                 break;
         }
+    }
+
+    configChangeHandler(name: string, value: string) {
+        this.setState({
+            config: {
+                ...this.state.config,
+                [name]: value
+            }
+        });
     }
 
     updateEventsArray(arr: Array<IEventModelStorageInterface>) {
@@ -107,6 +119,7 @@ class EventPanel extends Component<IEventPanelProps, ITimelineStorageInterface> 
 
         return (
             <div>
+                <ConfigComponent enabled={this.props.editable} config={this.state.config} callback={this.configChangeHandler}/>
                 <Title
                     title={this.state.header.title}
                     subtitle={this.state.header.subtitle}

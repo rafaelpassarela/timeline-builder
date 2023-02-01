@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import IEventModelStorageInterface from "../class/EventModelStorageInterface";
-import ITimelineStorageInterface from "../class/TimelineStorageInterface";
-import ConfigComponent from "./ConfigComponent";
+import ITimelineStorageInterface, { ITimeLineConfigStorage } from "../class/TimelineStorageInterface";
 import EventPanel from "./EventPanelComponent";
 // import MainMenu from "./MainMenuComponent";
 
@@ -16,12 +15,24 @@ const itens = Array<IEventModelStorageInterface>(
     {index: 5, align: "auto", date: "05/01/2022", title: "5 Ultima entrada", subtitle: "Sub Teste ultima"}
 );
 
+const defaultConfig: ITimeLineConfigStorage = {
+    background: '#62656a',
+    font: '#f5f5f5',
+    line: '#ffffff',
+    imageBorder: '#f5f5f5',
+    imageBackground: '#f0f8ff',
+    title: '#ffffff',
+    subtitle: '#ffffff',
+    card: '#252526'
+}
+
 class AppContainer extends Component {
 
     private isEditable: boolean = false;
 
     getTimeline(): ITimelineStorageInterface {
         const data: ITimelineStorageInterface = {
+            config: defaultConfig,
             header: {
                 title: 'My New Timeline',
                 subtitle: 'This is my new Timeline'
@@ -39,7 +50,6 @@ class AppContainer extends Component {
         const timelineData = this.getTimeline();
         return (
             <div>
-                <ConfigComponent enabled={this.isEditable}/>
                 {/* <MainMenu /> */}
                 <EventPanel editable={this.isEditable} timeline={timelineData}/>
             </div>
