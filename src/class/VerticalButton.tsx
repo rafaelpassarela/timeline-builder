@@ -137,13 +137,14 @@ class VerticalButton extends Component<IVerticalButtonProps, IVerticalButtonStat
                 buttonCancelCaption='Cancel'
                 buttonOkCaption='Save'
                 show={true}
+                large={true}
                 onCancelCallback={this.cancelDialogHandler}
                 onOkCallback={this.editDialogHandler}
             >
                 <Form>
                     <FormGroup controlId='title'>
                         <FormLabel>Title</FormLabel>
-                        <FormControl placeholder='My New Event Title' defaultValue={this.editData.title} onChange={this.handleChange}/>
+                        <FormControl placeholder='My New Event Title' defaultValue={this.editData.title} onChange={this.handleChange} autoFocus/>
                         <FormText>The event title is the highlighted sentence displayed in the timeline tree</FormText>
                     </FormGroup>
 

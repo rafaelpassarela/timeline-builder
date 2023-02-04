@@ -76,9 +76,10 @@ class TitleElement extends Component<ITitleElementProp, ITitleElementState> {
 
     getTitleComponent(isEditing : boolean, isEditable: boolean | undefined, text: string, type: string) {
         if (isEditing) {
+            const editConfig = (type === "h1" ? "title-config" : "subtitle-config");
             return (
                 <input
-                    className={type + " title-input"}
+                    className={type + " title-input " + editConfig}
                     autoFocus
                     defaultValue={text}
                     onChange={this.handleChange}
@@ -91,7 +92,7 @@ class TitleElement extends Component<ITitleElementProp, ITitleElementState> {
         // title component (H1)
         if (type === "h1") {
             return (
-                <h1 className={textClassName} onClick={this.textClickHandler}>
+                <h1 className={"title-config " + textClassName} onClick={this.textClickHandler}>
                     {text}&nbsp;
                 </h1>
             );
@@ -99,7 +100,7 @@ class TitleElement extends Component<ITitleElementProp, ITitleElementState> {
 
         // sub-title component (H5)
         return (
-            <h5 className={textClassName} onClick={this.textClickHandler}>
+            <h5 className={"subtitle-config " + textClassName} onClick={this.textClickHandler}>
                 {text}&nbsp;
             </h5>
         );
