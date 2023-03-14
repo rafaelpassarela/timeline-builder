@@ -12,17 +12,19 @@ services:
     command: /bin/sh -c "npm install && npm start"
     environment:
       - NPM_CONFIG_LOGLEVEL=warn
-      - PORT=3000
-      - HOME=/app/homedir
+      - PORT=3001
+      - HOME=/timelinebuilder
     volumes:
-      - ./:/timelinebuilder
+      - ./front:/timelinebuilder
     ports:
     #  - 80
-      - 3000
+      - 3001
     depends_on:
-      - artisan
+      - php
+      - mysql
     links:
-      - artisan
+      - php
+      - mysql
 
   mysql:
     container_name: db-mysql
