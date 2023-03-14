@@ -1,6 +1,6 @@
 FROM node:14.18.3
 
-ENV NPM_CONFIG_LOGLEVEL warm
+ENV NPM_CONFIG_LOGLEVEL warn
 
 ARG app_env
 

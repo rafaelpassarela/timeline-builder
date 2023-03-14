@@ -15,13 +15,14 @@ and `npm start`
 
 ## Cloning and Starting (with Docker)
 To build a new container run
-docker build -t tlb .
+docker build -t <IMAGE_NAME> .
+ex.: docker build -t timelinebuilder .
 
 To check the new container
 docker exec -it <IMG_ID> bash
 
 To listening to port 3000
-docker run -it --rm -p 3000:3000 --name timeline -v "<PROJECT PATH>":/timelinebuilder tlb
+docker run -it --rm -p 3000:3000 --name timeline -v "<PROJECT PATH>":/timelinebuilder timelinebuilder
 
 To get image id run and find the "Time LineBuilder" (tlb) image file
 docker ps -a
