@@ -1,108 +1,125 @@
-version: '3.4'
+version: '3.8'
 
 services:
-  timelinebuilder:
-    image: timelinebuilder
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    container_name: timelinebuilder
-    hostname: tlb
-    working_dir: /timelinebuilder
-    command: /bin/sh -c "npm install && npm start"
-    environment:
-      - NPM_CONFIG_LOGLEVEL=warn
-      - PORT=3001
-      - HOME=/timelinebuilder
+  frontend:
+    image: timeline_frontend
+    build: ./front
+    # ports:
+    #   - "3000:3000"
     volumes:
-      - ./front:/timelinebuilder
-    ports:
-      - 3001
+      - ./front:/app
+    networks:
+      timeline:
+        ipv4_address: 172.20.0.3
     depends_on:
-      - php
-      - mysql
-      - web
+      - api
+    env_file:
+      - .env
+    environment:
+      - VIRTUAL_HOST=front.timeline.com
+
+  # api:
+  #   image: timeline_api
+  #   build: ./api
+  #   ports:
+  #     - "9000:9000"
+  #   networks:
+  #     timeline:
+  #       ipv4_address: 172.20.0.4
+  #   depends_on:
+  #     - mysql
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - VIRTUAL_HOST=api.timeline.com
+  #     - VIRTUAL_PORT=9000
+  #   volumes:
+  #     - ./api:/var/www/html
+
+  api:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    # ports:
+    #   - "80:80"
+    env_file:
+      - .env
+    environment:
+      - VIRTUAL_HOST=api.timeline.com
+      # - VIRTUAL_PORT=9000
+    networks:
+      timeline:
+        ipv4_address: 172.20.0.4
+    volumes:
+      - ./api:/www
+      - ./default2.conf:/etc/nginx/conf.d/default.conf
     links:
       - php
+
+  php:
+    image: php:8.2-fpm
+    container_name: php-fpm
+    volumes:
+      - ./api:/www
+    links:
       - mysql
-      - web
 
   mysql:
-    image: mysql:5.7
-    container_name: db-mysql
-    hostname: tlb
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    image: mysql:8.0
+    # ports:
+    #   - "3306:3306"
+    networks:
+      timeline:
+        ipv4_address: 172.20.0.5
+    env_file:
+      - .env
     environment:
-      MYSQL_ROOT_PASSWORD:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
-      MYSQL_DATABASE: api
-      MYSQL_USER: api
-      MYSQL_PASSWORD: mudar123
+      - VIRTUAL_HOST=mysql.timeline.com
+    restart: always
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       timeout: 20s
       interval: 10s
       retries: 10
+    volumes:
+      - mysql_data:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin
     container_name: php-myadmin
     hostname: tlb
     restart: always
-    ports:
-      - '127.0.0.1:8080:80'
+    # ports:
+    #   - '127.0.0.1:8080:80'
+    networks:
+      timeline:
+        ipv4_address: 172.20.0.6
     environment:
       - PMA_ARBITRARY=1
+      - VIRTUAL_HOST=pma.timeline.com
     links:
       - mysql
 
-  web:
-    image: nginx:latest
-    container_name: nginx
-    hostname: tlb
-    restart: always
+  nginx-proxy:
+    image: jwilder/nginx-proxy
     ports:
-      - "127.0.0.1:80:80"
+      - "80:80"
+      - "3000:3000"
+      - "3306:3306"
+      - "9000:9000"
+    networks:
+      timeline:
+        ipv4_address: 172.20.0.2
     volumes:
-      - ./api:/www
-      - ./default.conf:/etc/nginx/conf.d/default.conf
-    links:
-      - php
-    depends_on:
-      - php
+      - /var/run/docker.sock:/tmp/docker.sock:ro
 
-  php:
-    build: ./api/.
-    container_name: php-fpm
-    hostname: tlb
-    volumes:
-      - ./api:/www
-    restart: on-failure
-    depends_on:
-      - mysql
-    links:
-      - mysql
+volumes:
+  mysql_data:
 
-  # artisan:
-  #     container_name: php-artisan
-  #     build: .
-  #     volumes:
-  #         - ./api:/www
-  #     command: bash -c "chmod 777 -R storage; php artisan key:generate; php artisan migrate;"
-  #     restart: on-failure
-  #     depends_on:
-  #         - php
-  #         - mysql
-  #     links:
-  #         - php
-  #         - mysql
+networks:
+  timeline:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
 
-  phpqa:
-    image: jakzal/phpqa:php8.2
-    container_name: composer-install
-    hostname: tlb
-    volumes:
-      - ./api:/www
-    working_dir: /www
-    command: bash -c "composer install"
