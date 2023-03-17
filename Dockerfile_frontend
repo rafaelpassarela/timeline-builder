@@ -1,23 +1,35 @@
 # Define a imagem base
-FROM node:14.18.3-alpine3.15
+FROM node:14.18.3
+
+ENV NPM_CONFIG_LOGLEVEL warn
+
+ARG app_env
+
+ENV APP_ENV ${app_env}
 
 # Define o diretório de trabalho
-WORKDIR /app
+RUN mkdir -p /timelinebuilder
+WORKDIR /timelinebuilder
 
-# Copia o arquivo package.json para o diretório de trabalho
-COPY ./front/package.json .
+# Copia todo o código do frontend para o diretório de trabalho
+COPY ./front ./
 
 # Instala as dependências do projeto
 RUN npm install
-
-# Copia todo o código do frontend para o diretório de trabalho
-COPY ./front .
 
 # Expõe a porta 3000
 EXPOSE 3000
 
 # Inicia o servidor do frontend
-CMD ["npm", "start"]
+CMD if [ ${APP_ENV} = production ]; \
+	then \
+	npm install -g http-server && \
+	npm run build && \
+	cd build && \
+	hs -p 3001; \
+	else \
+	npm run start; \
+	fi
 
 
 # rodar da pasta raiz -> docker build -t timeline_frontend -f Dockerfile_frontend .
