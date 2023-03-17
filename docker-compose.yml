@@ -12,7 +12,7 @@ services:
     env_file:
       - .env
     environment:
-      - PORT=3001
+      - PORT=3000
       - HOME=/timelinebuilder
       - VIRTUAL_HOST=front.timeline.com
     volumes:
@@ -21,7 +21,8 @@ services:
       timeline:
         ipv4_address: 172.20.0.3
     ports:
-      - 3000
+      - "80:3000"
+      - "3000:3000"
     depends_on:
       - php
       - mysql
@@ -71,7 +72,8 @@ services:
     container_name: timeline_nginx
     restart: always
     ports:
-      - "80:80"
+      # - "80:80"
+      - "3030:80"
     networks:
       timeline:
         ipv4_address: 172.20.0.6
@@ -86,6 +88,8 @@ services:
       - php
     depends_on:
       - php
+    extra_hosts:
+      - "localhost:172.20.0.6"
 
   php:
     image: php:8.2-fpm

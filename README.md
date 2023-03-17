@@ -27,6 +27,11 @@ To get image id run and find the "Time LineBuilder" (tlb) image file
 
 To bring up the development environment run ```docker-compose up```, the "-d" param is optional (user to unlock terminal).
 
+## Containers Addresses
+- PMA: http://localhost:8080/
+- Front: http://localhost/ or http://localhost:3000/
+- API: http://localhost:3030/
+
 ## Contributions
 Please, make your own branch and open a MR, that's it.
 
