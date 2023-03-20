@@ -35,4 +35,5 @@ To bring up the development environment run ```docker-compose up```, the "-d" pa
 Please, make your own branch and open a MR, that's it. <br>
 <br>
 Icons provided by [React Icons](https://react-icons.github.io/react-icons)<br>
+SVG Icons By [SVG Repo](https://www.svgrepo.com/)<br>
 Build with [React Bootstrap](https://react-bootstrap.github.io/)<br>
