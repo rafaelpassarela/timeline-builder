@@ -69,7 +69,7 @@ services:
 
   api:
     image: nginx:latest
-    container_name: timeline_nginx
+    container_name: timeline_api_nginx
     restart: always
     ports:
       # - "80:80"
@@ -127,7 +127,7 @@ services:
     volumes:
       - ./api:/www
     working_dir: /www
-    command: bash -c "composer install"
+    command: bash -c "composer install && chmod 777 -R storage/"
 
 volumes:
   mysql_data:

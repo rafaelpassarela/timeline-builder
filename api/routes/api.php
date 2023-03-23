@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "api" middleware group. Make something great!
 |
+| Swagger Gen: "php artisan l5-swagger:generate" or run "composer swagger" script.
+| PS.: You need to run inside "timeline_ci" container, running bash script "./docker-run-phpfpm.sh"
+|
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -19,5 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/test', function () {
-    return "Ok";
+    return response()->json([
+        'code' => 200,
+        'message' => 'This is a Test',
+    ]);
 });
