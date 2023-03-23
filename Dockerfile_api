@@ -1,0 +1,19 @@
+FROM php:8-fpm
+
+RUN apt-get update && docker-php-ext-install pdo_mysql
+
+COPY ./api/docker-entrypoint.sh /
+
+RUN chmod +x /docker-entrypoint.sh
+
+WORKDIR /www
+
+COPY ./api .
+
+RUN chmod -R 777 storage/
+
+EXPOSE 80
+
+RUN /docker-entrypoint.sh
+
+# rodar da pasta raiz -> docker build -t timeline_api -f Dockerfile_api .
