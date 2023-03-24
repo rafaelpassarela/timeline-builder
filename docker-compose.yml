@@ -18,8 +18,9 @@ services:
     volumes:
       - ./front:/timelinebuilder
     networks:
-      timeline:
-        ipv4_address: 172.20.0.3
+      - timeline
+        # ipv4_address: 172.20.0.3
+
     ports:
       - "80:3000"
       - "3000:3000"
@@ -40,8 +41,8 @@ services:
     ports:
       - "3306:3306"
     networks:
-      timeline:
-        ipv4_address: 172.20.0.4
+      - timeline
+        # ipv4_address: 172.20.0.4
     env_file:
       - .env
     environment:
@@ -59,11 +60,10 @@ services:
     ports:
       - '127.0.0.1:8080:80'
     networks:
-      timeline:
-        ipv4_address: 172.20.0.5
+      - timeline
+        # ipv4_address: 172.20.0.5
     environment:
       - PMA_ARBITRARY=1
-      - VIRTUAL_HOST=pma.timeline.com
     links:
       - mysql
 
@@ -75,8 +75,8 @@ services:
       # - "80:80"
       - "3030:80"
     networks:
-      timeline:
-        ipv4_address: 172.20.0.6
+      - timeline
+        # ipv4_address: 172.20.0.6
     env_file:
       - .env
     environment:
@@ -98,8 +98,8 @@ services:
     ports:
       - "9000:9000"
     networks:
-      timeline:
-        ipv4_address: 172.20.0.7
+      - timeline
+        # ipv4_address: 172.20.0.7
     volumes:
       - ./api:/www
     depends_on:
@@ -124,17 +124,23 @@ services:
   phpqa:
     image: jakzal/phpqa:php8.2
     container_name: timeline_ci
+    env_file:
+      - .env
     volumes:
       - ./api:/www
     working_dir: /www
-    command: bash -c "composer install && chmod 777 -R storage/"
+    command: bash -c "apt update && docker-php-ext-install pdo_mysql && composer install && chmod 777 -R storage/ && php artisan migrate"
+    networks:
+      - timeline
+    depends_on:
+      - mysql
 
 volumes:
   mysql_data:
 
 networks:
   timeline:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.20.0.0/24
+#    driver: bridge
+#    ipam:
+#      config:
+#        - subnet: 172.20.0.0/24
