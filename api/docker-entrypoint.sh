@@ -1,3 +1,7 @@
 #!/bin/bash
 
-echo 'Hello World!'
+echo 'API Ready'
+
+# compose start: php-fpm
+
+# php toolbox list-tools

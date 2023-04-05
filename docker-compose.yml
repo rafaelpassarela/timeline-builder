@@ -92,9 +92,17 @@ services:
       - "localhost:172.20.0.6"
 
   php:
-    image: php:8.2-fpm
-    container_name: timeline_php-fpm
-    restart: on-failure
+    image: timeline_php_fpm
+    build:
+      context: .
+      dockerfile: ./Dockerfile_api
+    container_name: timeline_php_fpm
+    command: bash -c "chmod 777 -R storage/ && php artisan migrate && php-fpm"
+    restart: always
+    env_file:
+      - .env
+    environment:
+      WAIT_HOSTS: mysql:3306
     ports:
       - "9000:9000"
     networks:
@@ -102,37 +110,10 @@ services:
         # ipv4_address: 172.20.0.7
     volumes:
       - ./api:/www
+    working_dir: /www
     depends_on:
       - mysql
     links:
-      - mysql
-
-  # artisan:
-  #     container_name: php-artisan
-  #     build: .
-  #     volumes:
-  #         - ./api:/www
-  #     command: bash -c "chmod 777 -R storage; php artisan key:generate; php artisan migrate;"
-  #     restart: on-failure
-  #     depends_on:
-  #         - php
-  #         - mysql
-  #     links:
-  #         - php
-  #         - mysql
-
-  phpqa:
-    image: jakzal/phpqa:php8.2
-    container_name: timeline_ci
-    env_file:
-      - .env
-    volumes:
-      - ./api:/www
-    working_dir: /www
-    command: bash -c "apt update && docker-php-ext-install pdo_mysql && composer install && chmod 777 -R storage/ && php artisan migrate"
-    networks:
-      - timeline
-    depends_on:
       - mysql
 
 volumes:

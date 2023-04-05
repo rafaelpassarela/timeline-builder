@@ -1,4 +1,3 @@
-
 # Timeline Builder
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
 Node -v 14.18.3<br>
@@ -30,6 +29,19 @@ To bring up the development environment run ```docker-compose up```, the "-d" pa
 - PMA: http://localhost:8080/ <br>
 - Front: http://localhost/ or http://localhost:3000/ <br>
 - API: http://localhost:3030/ <br>
+
+## Reset Docker Images and Containers
+#### Unix
+To delete all containers including its volumes use, <br>
+```docker rm -vf $(docker ps -aq)```<br>
+To delete all the images,<br>
+```docker rmi -f $(docker images -aq)```<br>
+Remember, you should remove all the containers before removing all the images from which those containers were created.
+#### Windows - Powershell
+```docker images -a -q | % { docker image rm $_ -f }```<br>
+
+#### Windows - cmd.exe
+```for /F %i in ('docker images -a -q') do docker rmi -f %i```<br>
 
 ## Contributions
 Please, make your own branch and open a MR, that's it. <br>
