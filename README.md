@@ -49,3 +49,4 @@ Please, make your own branch and open a MR, that's it. <br>
 Icons provided by [React Icons](https://react-icons.github.io/react-icons)<br>
 SVG Icons By [SVG Repo](https://www.svgrepo.com/)<br>
 Build with [React Bootstrap](https://react-bootstrap.github.io/)<br>
+Swagger-PHP By [Zircote](https://zircote.github.io/swagger-php/guide/faq.html)<br>
