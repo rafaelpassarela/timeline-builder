@@ -17,6 +17,10 @@ COPY ./front ./
 # Instala as dependências do projeto
 RUN npm install
 
+RUN mkdir ./open-api-generator/ ; wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.2.0/openapi-generator-cli-5.2.0.jar -O ./open-api-generator/openapi-generator-cli.jar
+
+RUN apt update && apt -y install default-jre
+
 # Expõe a porta 3000
 EXPOSE 3000
 

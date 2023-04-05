@@ -17,9 +17,11 @@ services:
       - VIRTUAL_HOST=front.timeline.com
     volumes:
       - ./front:/timelinebuilder
+      - ./api/storage/api-docs:/api-docs
     networks:
-      timeline:
-        ipv4_address: 172.20.0.3
+      - timeline
+        # ipv4_address: 172.20.0.3
+
     ports:
       - "80:3000"
       - "3000:3000"
@@ -40,8 +42,8 @@ services:
     ports:
       - "3306:3306"
     networks:
-      timeline:
-        ipv4_address: 172.20.0.4
+      - timeline
+        # ipv4_address: 172.20.0.4
     env_file:
       - .env
     environment:
@@ -59,11 +61,10 @@ services:
     ports:
       - '127.0.0.1:8080:80'
     networks:
-      timeline:
-        ipv4_address: 172.20.0.5
+      - timeline
+        # ipv4_address: 172.20.0.5
     environment:
       - PMA_ARBITRARY=1
-      - VIRTUAL_HOST=pma.timeline.com
     links:
       - mysql
 
@@ -75,8 +76,8 @@ services:
       # - "80:80"
       - "3030:80"
     networks:
-      timeline:
-        ipv4_address: 172.20.0.6
+      - timeline
+        # ipv4_address: 172.20.0.6
     env_file:
       - .env
     environment:
@@ -92,49 +93,36 @@ services:
       - "localhost:172.20.0.6"
 
   php:
-    image: php:8.2-fpm
-    container_name: timeline_php-fpm
-    restart: on-failure
+    image: timeline_php_fpm
+    build:
+      context: .
+      dockerfile: ./Dockerfile_api
+    container_name: timeline_php_fpm
+    command: bash -c "chmod 777 -R storage/ && php artisan migrate && php-fpm"
+    restart: always
+    env_file:
+      - .env
+    environment:
+      WAIT_HOSTS: mysql:3306
     ports:
       - "9000:9000"
     networks:
-      timeline:
-        ipv4_address: 172.20.0.7
+      - timeline
+        # ipv4_address: 172.20.0.7
     volumes:
       - ./api:/www
+    working_dir: /www
     depends_on:
       - mysql
     links:
       - mysql
-
-  # artisan:
-  #     container_name: php-artisan
-  #     build: .
-  #     volumes:
-  #         - ./api:/www
-  #     command: bash -c "chmod 777 -R storage; php artisan key:generate; php artisan migrate;"
-  #     restart: on-failure
-  #     depends_on:
-  #         - php
-  #         - mysql
-  #     links:
-  #         - php
-  #         - mysql
-
-  phpqa:
-    image: jakzal/phpqa:php8.2
-    container_name: timeline_ci
-    volumes:
-      - ./api:/www
-    working_dir: /www
-    command: bash -c "composer install && chmod 777 -R storage/"
 
 volumes:
   mysql_data:
 
 networks:
   timeline:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.20.0.0/24
+#    driver: bridge
+#    ipam:
+#      config:
+#        - subnet: 172.20.0.0/24
