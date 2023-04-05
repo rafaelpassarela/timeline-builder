@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiTestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,9 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/test', function () {
-    return response()->json([
-        'code' => 200,
-        'message' => 'This is a Test',
-    ]);
-});
+// Route::get('/test', function () {
+//     return response()->json([
+//         'code' => 200,
+//         'message' => 'This is a Test',
+//     ]);
+// });
+Route::get('/test', [ApiTestController::class, 'makeTest']);
