@@ -17,6 +17,7 @@ services:
       - VIRTUAL_HOST=front.timeline.com
     volumes:
       - ./front:/timelinebuilder
+      - ./api/storage/api-docs:/api-docs
     networks:
       - timeline
         # ipv4_address: 172.20.0.3
