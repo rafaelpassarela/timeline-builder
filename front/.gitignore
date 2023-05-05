@@ -12,9 +12,12 @@
 
 # testing
 /coverage
+.bash_history
+to-do.txt
 
 # production
 /build
+/public/test*
 
 # misc
 .DS_Store

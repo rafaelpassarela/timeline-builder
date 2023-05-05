@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Routes, Route } from 'react-router-dom';
-import Home from "./pages/HomeComponent";
+import Home from "./pages/home/HomeComponent";
 import TimeLine from "./pages/TimeLineComponent";
 import UserRegister from "./pages/UserRegisterComponent";
 
